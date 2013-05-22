@@ -1,0 +1,60 @@
+<% provide(:title, 'Create New Account') %>
+<h3>Bạn đã chọn tạo một tài khoản mới.Vui lòng đọc các điều khoản sử dụng</h3>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@user) do |f| %>
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+      Điều khoản sử dụng
+            <textarea rows="4" cols="50">
+       QUI ĐỊNH VỀ MUA BÁN
+
+1) Đọc kỹ "Điều khoản và Quy Định ".
+2) Dùng Tiếng Việt có dấu khi sử dụng diễn đàn.
+3) Tài khoản của bạn sẽ bị xóa nếu bạn không viết bài nào và không đăng nhập trong vòng 365 ngày kể từ ngày đăng ký.
+
+Xin nhớ là chúng tôi không chịu trách nhiệm về bất kỳ bài viết nào đăng trong diễn đàn. Chúng tôi không đảm bảo sự chính xác, hoàn hảo hoặc hữu ích của bất kỳ bài viết nào, và không chịu trách nhiệm về nội dung của bất kỳ bài viết nào.
+
+Các bài viết bộc lộ quan điểm của người viết bài, không nhất thiết là quan điểm của diễn đàn. Bất kỳ thành viên nào cảm thấy một bài viết có nội dung không lành mạnh thì xin hãy thông báo cho chúng tôi biết bằng email. Chúng tôi có khả năng xóa bài viết có nội dung không lành mạnh và chúng tôi sẽ cố gắng để làm như thế trong thời gian sớm nhất nếu chúng tôi xét thấy việc xóa bài viết là cần thiết.
+    </textarea>
+     <div class="block-btnSet">
+              <div class="block-text">
+                <span class="checkCell">
+                  <table>
+                    <tr>
+                    </td><input type="checkbox" id="agreement_xx1" name="nnn1"><label for="agreement_xx1">
+                    </td>
+                    <td>
+                      Toi da doc noi dung va dieu khoan !
+                    </td>
+                    </tr>
+                  </table>
+                  </label></span>
+              </div> 
+              <a class="row", disabled="disabled">
+                 <%= f.submit "Create Account", class: "btn btn-large btn-primary disabled", id: "agreement_xx1_btn" %>
+              </a>            
+              <script type="text/javascript">
+                var agreement_xx1_checkbox = $('#agreement_xx1');
+                var agreement_xx1_btn = $('#agreement_xx1_btn');
+                
+                agreement_xx1_checkbox.click(function(){
+                  var agreement_xx1_checked = $('#agreement_xx1').is(':checked');
+
+                  if(agreement_xx1_checked){
+                    agreement_xx1_btn.removeAttr("disabled");
+                    agreement_xx1_btn.removeClass('disabled');
+                  }else{
+                    agreement_xx1_btn.attr("disabled", "disabled");
+                    agreement_xx1_btn.addClass('disabled');
+                  }
+                });
+              </script>
+            </div>
+    <% end %>
+  </div>
+</div>
+ 
+
+

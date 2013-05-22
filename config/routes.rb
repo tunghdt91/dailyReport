@@ -1,6 +1,9 @@
 DailyReport::Application.routes.draw do
 
   resources :users
+
+  root to: 'users#home'
+  match '/create_new_account' , to: 'users#create_new_account'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

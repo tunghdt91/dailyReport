@@ -34,4 +34,17 @@ DailyReport::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+
+# these options are only needed if you choose smtp delivery
+  config.action_mailer.smtp_settings = {
+  :address        => 'smtp.gmail.com',
+  :port           => 25,
+  :domain         => 'www.gmail.com',
+  :authentication => :login,
+  :user_name      => 'simre102@gmail.com',
+  :password       => 'dangtung'
+}
 end
