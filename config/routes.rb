@@ -1,9 +1,23 @@
 DailyReport::Application.routes.draw do
 
   resources :users
+  resources :sessions
+  resources :actives
+  resources :reports
 
   root to: 'users#home'
+
+  #users
   match '/create_new_account' , to: 'users#create_new_account'
+  #active
+  match '/show_info_user', to: 'actives#show_info_user'
+  match '/active_user', to: 'actives#active_user'
+
+  match '/signin',  to: 'sessions#new'
+  match '/signout', to: 'sessions#destroy', via: :delete
+
+  #report
+  match '/user_report', to: 'reports#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

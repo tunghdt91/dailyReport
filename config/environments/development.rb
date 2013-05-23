@@ -44,7 +44,7 @@ DailyReport::Application.configure do
   :port           => 25,
   :domain         => 'www.gmail.com',
   :authentication => :login,
-  :user_name      => 'simre102@gmail.com',
+  :user_name      => 'framgia.jp@gmail.com',
   :password       => 'dangtung'
 }
 end
