@@ -23,7 +23,7 @@
 <% if !@user.active%>
 	<%= form_for :actives, url: {action: "active_user"} do|f| %>
 	<input type ="hidden" name = "id" id= "ghg" value = <%=@user.id%>>
-  	<%= f.submit "Active Now"%>
+  	<%= f.submit "Active Now", data: { confirm: 'Active this user?'}%>
   	<%end%>
 <%else%>
 <!--####################-->

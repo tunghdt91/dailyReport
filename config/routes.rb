@@ -8,7 +8,9 @@ DailyReport::Application.routes.draw do
   root to: 'users#home'
 
   #users
+ 
   match '/create_new_account' , to: 'users#create_new_account'
+  match '/all_user', to: 'users#all_user'
   #active
   match '/show_info_user', to: 'actives#show_info_user'
   match '/active_user', to: 'actives#active_user'
@@ -18,6 +20,7 @@ DailyReport::Application.routes.draw do
 
   #report
   match '/user_report', to: 'reports#index'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

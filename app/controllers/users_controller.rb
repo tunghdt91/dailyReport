@@ -17,16 +17,18 @@ class UsersController < ApplicationController
 			sign_in @user
 			redirect_to root_path
 		else
-			flash[:errors] = "Errors"
+			flash[:error] = "Email invalid !"
 			redirect_to create_new_account_path
 		end
 	end
 
 	def show
-		@user = User.find(params[:id]) || User.find(params[:md5])
-		if @user.active
-		else
-			flash[:error] = "User chua duoc kich hoat"
-		end
+		@user = User.find(params[:id])
+		#@microposts = @user.microposts.paginate(page: params[:page])
+	end
+
+	def all_user
+		@users = User.paginate(page: params[:page])
+		#@users = User.find_by_sql("select *from users ORDER BY created_at DESC")
 	end
 end

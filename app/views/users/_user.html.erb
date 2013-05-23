@@ -1,0 +1,13 @@
+<table>
+	<% if user.active%>
+		<tr height= "10px", align = "center", bgcolor = "#CCFF33">
+			<td><%= user.email%></td>
+			<td><%= user.created_at%></td>
+		</tr>
+	<%else%>
+		<tr height= "10px", align = "center", bgcolor = "#CC0000">
+			<td><%= user.email%></td>
+			<td><%= user.created_at%></td>
+		</tr>
+	<%end%>
+</table>

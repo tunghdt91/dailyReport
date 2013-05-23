@@ -5,6 +5,11 @@ module SessionsHelper
     
   end
 
+  def signin_and_active(admin,user)
+    sign_in(admin)
+    redirect_to show_info_user_path(@user)   
+  end
+
   def current_user=(user)
     @current_user = user
   end
@@ -62,6 +67,7 @@ module SessionsHelper
    
     if !current_user.nil? && current_user.active 
     else
+      flash[:notice] = "Permission Access ! Contact to Admin"
       redirect_to root_path
     end
   end

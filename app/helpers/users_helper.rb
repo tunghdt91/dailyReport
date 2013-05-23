@@ -2,8 +2,10 @@ module UsersHelper
 	
 	# tao mat khau..viet ham rieng.tam thoi mac dinh abcd
 	def create_pass_for_user(user)
-		user.password = "abcd"
-		user.password_confirmation = "abcd"
+    s = Digest::MD5.hexdigest(@user.email+"framgia.com")
+    passwd = s[0]+s[1]+s[2].upcase+s[3].upcase+s[4]+s[5]
+		user.password = passwd
+		user.password_confirmation = passwd
   	end
   	####### show avatar
   	def gravatar_for(user, options = { size: 50 })

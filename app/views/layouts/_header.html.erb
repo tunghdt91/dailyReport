@@ -4,8 +4,11 @@
     	<%= link_to "dailyReport", root_path, id: "logo" %>
     	<nav>
         <ul class="nav pull-right">
-          <li> <%= link_to 'Report' ,user_report_path,class: "btn btn-small btn-primary"%></li>
-            <% if signed_in? %>
+          <li> <%= link_to 'Report' ,user_report_path,class: "btn btn-large btn-primary"%></li>
+          <% if signed_in? %>
+            <% if checked_admin?%>
+              <li> <%= link_to 'Manager User' ,all_user_path,class: "btn btn-large btn-primary"%></li>
+            <%end%>
              <li id="fat-menu" class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <t1><%= current_user.email %></t1>
