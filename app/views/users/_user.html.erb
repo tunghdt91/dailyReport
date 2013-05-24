@@ -1,13 +1,41 @@
-<table>
+<table border='1' width='100%'>
+	<%@user = user%>
 	<% if user.active%>
-		<tr height= "10px", align = "center", bgcolor = "#CCFF33">
-			<td><%= user.email%></td>
-			<td><%= user.created_at%></td>
+		<tr height= "50px", align = "center">
+			<td width='5%'><%= user.id%></td>
+			<% if user.group_id==6 %>
+				<td width='5%'><p3><b><%= user.group_id%></b></p3></td>
+			<% else %>
+				<td width='5%'><%= user.group_id%></td>
+			<% end %>
+			<% if user.group_manager%>
+				<td width='10%'><p3><b>Yes</b></p3></td>
+			<% else %>
+				<td width='10%'></td>
+			<% end %>
+			<td width='30%'><%= user.email%></td>
+			<td width='30%'><%= user.created_at%></td>
+			<td width='10%'>Activated</td>
+			<td width='10%'><%= link_to "Edit User", edit_user_path(@user) %></td>
 		</tr>
 	<%else%>
-		<tr height= "10px", align = "center", bgcolor = "#CC0000">
-			<td><%= user.email%></td>
-			<td><%= user.created_at%></td>
+		<tr height= "50px", align = "center">
+			<td width='5%'><p3><%= user.id%></p3></td>
+			<% if user.group_id==6 %>
+				<td width='5%'><p3><b><%= user.group_id%></b></p3></td>
+			<% else %>
+				<td width='5%'><p3><%= user.group_id%></p3></td>
+			<% end %>
+			<% if user.group_manager%>
+				<td width='10%'><p3><b>Yes</b></p3></td>
+			<% else %>
+				<td width='10%'></td>
+			<% end %>
+			<td width='30%'><p3><%= user.email%></p3></td>
+			<td width='30%'><p3><%= user.created_at%></p3></td>
+			<td width='10%'><%= link_to "Active Now", show_info_user_path(@user) %></td>
+			<td width='10%'><%= link_to "Edit User", edit_user_path(user) %></td>
+
 		</tr>
 	<%end%>
 </table>

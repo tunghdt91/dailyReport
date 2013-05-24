@@ -4,13 +4,19 @@
 <table border = "1", width = "80%", align = "center">
   <tr height= "10px", align = "center", bgcolor = "#CCFF33">
     <td>User ID</td>
+    <td>Group ID</td>
     <td>User Email</td>
     <td>Createt At</td>
     <td>Active</td>
   </tr>
   <tr align = center>
     <td><%= @user.id %></td>
-    <td><%= @user.email%></td>
+    <%if @user.group_id==6%>
+      <td><p3><%= @user.group_id %></p3></td>
+    <%else%>
+      <td><%= @user.group_id %></td>
+    <%end%>
+    <td><%= @user.email %></td>
     <td><%= @user.created_at %></td>
     <td>
     	<%if @user.active%> Actived

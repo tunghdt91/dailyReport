@@ -37,6 +37,5 @@ class ActivesController < ApplicationController
 		@user.update_attributes(active: true)
 		flash[:notice] = "Success ! This account below activated !"
 		redirect_to show_info_user_path(@user)
-	end
-		
+	end		
 end

@@ -1,0 +1,36 @@
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this test from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+Email :<p2><%=   @user.email%></p2>
+<br/><br/><br/>
+  <div class="field">
+      <%= f.label :'New Password' %>
+      <%= f.password_field :password %>
+  </div>    
+  <div class="field">
+    <%= f.label :'New Group' %><br />
+    <%= f.text_field :group_id %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :'Group_manager' %> 
+    <%= f.radio_button :group_manager, '0'%> No
+    <%= f.radio_button :group_manager, '1'%> Yes
+  </div>
+  <br/> 
+  <br/> 
+  <input type="hidden" name ="id" value = <%=@user.id %>>
+  <div class="actions">
+    <%=f.submit "Save", class: "btn btn-large btn-primary" %>
+  </div>
+<% end %>

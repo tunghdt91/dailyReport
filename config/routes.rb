@@ -4,6 +4,7 @@ DailyReport::Application.routes.draw do
   resources :sessions
   resources :actives
   resources :reports
+  resources :catalogs
 
   root to: 'users#home'
 
@@ -20,6 +21,8 @@ DailyReport::Application.routes.draw do
 
   #report
   match '/user_report', to: 'reports#index'
+
+  #match catalog
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

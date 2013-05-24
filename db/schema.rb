@@ -11,9 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130523020449) do
+ActiveRecord::Schema.define(:version => 20130524081701) do
 
   create_table "actives", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "catalogs", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "reports", :force => true do |t|
+    t.string   "catalog_id"
+    t.string   "content"
+    t.string   "file_name"
+    t.string   "file_path"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -28,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20130523020449) do
     t.string   "remember_token"
     t.string   "md5"
     t.integer  "group_id",        :default => 1
+    t.boolean  "group_manager",   :default => false
   end
 
   add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
