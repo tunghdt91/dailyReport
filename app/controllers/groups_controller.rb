@@ -3,10 +3,14 @@ class GroupsController < ApplicationController
 	end
 
 	def show
+		if !current_user.group_id?
+			flash[:error] = "You are not in  group"
+			redirect_to root_path
+		else
 		group_id = current_user.group_id 
 		@users = User.find_by_sql("SELECT * FROM users  WHERE group_id = #{group_id} and group_manager='f'")
 		@users_manager = User.find_by_sql("SELECT * FROM users  WHERE group_id = #{group_id} and group_manager='t' ")
-		
+		end
 	end
 
 	def index
