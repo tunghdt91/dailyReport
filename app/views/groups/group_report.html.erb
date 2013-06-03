@@ -1,0 +1,40 @@
+<h2> Group ID :<p3><%=current_user.group_id%></p3><br/></h2>
+
+<% @users.each do |user|%>
+<hr/>
+    <%= gravatar_for user %> <p3><%= user.email%></p3> <br/><br/> 
+   
+    <%catalogs =Report.find_by_sql("select DISTINCT  catalog_id from reports where user_id=#{user.id}") %> <!--Number catalog for this user-->
+     <% col = catalogs.count%>
+     <%tmp = col-1%>
+    <% if col==0%>
+      Không tìm thấy nội dung nào liên quan.<br/><br/>
+    <% else %><!--have report ..create table -->
+      <table border='1'>
+        <tr height= "50px", align = "center" bgcolor = "#CCFF33">
+          <% for i in 0..tmp %>
+          <td><%= Catalog.find(catalogs[i].catalog_id.to_i).name%></td>
+          <% end %>
+        </tr>
+
+        <tr>
+          <% for i in 0..tmp %>
+          <% @count = 0 %>
+          <% reports_of_user = Report.find_by_sql("select *from reports where user_id=#{user.id} and catalog_id=#{catalogs[i].catalog_id.to_i} ORDER BY created_at DESC")%>
+            <td>
+                <% reports_of_user.each do |r|%>
+                  
+                  <ul>
+                    <li><p3><%= @count+=1 %>-</p3> <%= r.content %></li>
+                    <span class="file_attach">
+                    <a href="/data/<%=r.file_name%>" target="_blank"><%= r.file_name %></a>
+                    <span class="timestamp"><%= r.created_at %> (<%= time_ago_in_words(r.created_at) %>ago)</span>
+                  </ul>
+                <% end %>
+            </td>
+          <% end %>
+        </tr>
+       </table>
+    <% end %>
+
+<% end %>

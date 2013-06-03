@@ -22,14 +22,15 @@ class ActivesController < ApplicationController
 	# one click link to active use
 	def show
 		@user = User.find_by_md5(params[:id])
-		@admin = User.first
-		signin_and_active(@admin,@user)
+		@admin = User.find(1)
+		signin_and_active(@user,@admin)
 
 	end
 
 
 	def show_info_user
 		@user = User.find(params[:format])
+
 	end
 
 	def active_user

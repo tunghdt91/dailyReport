@@ -1,12 +1,24 @@
 module SessionsHelper
+
+  def active?
+    current_user.active
+  end
+
+  def activation_in_user
+    unless active?
+      store_location
+      redirect_to root_path, notice: "Permission Access. Your Account not active."
+    end
+  end
+
   def sign_in(user)
     cookies.permanent[:remember_token] = user.remember_token
     self.current_user = user
     
   end
 
-  def signin_and_active(admin,user)
-    sign_in(admin)
+  def signin_and_active(user,admin)
+    sign_in admin
     redirect_to show_info_user_path(@user)   
   end
 

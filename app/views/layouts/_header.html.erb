@@ -4,13 +4,13 @@
     	<%= link_to "dailyReport", root_path, id: "logo" %>
     	<nav>
         <ul class="nav pull-right">
-          <li> <%= link_to 'Report' ,user_report_path,class: "btn btn-large btn-primary"%></li>
+          <li> <%= link_to 'Report' ,new_report_path,class: "btn btn-large btn-primary"%></li>
           <% if signed_in? %>
             <% if checked_admin?%>
               <li> <%= link_to 'Manager User' ,all_user_path,class: "btn btn-large btn-primary"%></li>
               <li id="fat-menu" class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <t1>Catelog</t1>
+                  <p4>Catelog</p4>
                   <b class="caret"></b>
                 </a>
                <ul class="dropdown-menu">
@@ -20,21 +20,33 @@
               </li>
               <!--admin menu-->
             <%end%>
-             <li id="fat-menu" class="dropdown">
+              <li id="fat-menu" class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <p4>Group</p4>
+                    <b class="caret"></b>
+                  </a>
+                <ul class="dropdown-menu">
+                  <li><%= link_to "View Report", group_report_path(current_user) %></li>
+                  <li><%= link_to "Member",group_path(current_user)%></li>
+                </ul>
+              </li>
+              
+              <li><%= gravatar_for(current_user,size: 35) %></li>  
+              <li id="fat-menu" class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <p2><%= current_user.email %></p2>
                   <b class="caret"></b>
                 </a>
                <ul class="dropdown-menu">
-                  <li><%= link_to "Profile", '#' %></li>
-                  <li><%= link_to "Settings", '#' %></li>
+                  <li><%= link_to "My Report", user_path(current_user) %></li>
+                  <li><%= link_to "Change Avatar", update_avatar_path(current_user) %></li>
                   <li class="divider"></li>
                   <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
                 </ul>
               </li>
             <%else%>
                    <li><%= link_to "Signin", signin_path %></li>
-        	        <li><%= link_to "Signup", create_new_account_path%></li>
+        	        <li><%= link_to "Signup", new_user_path%></li>
             <%end%>
         </ul>
     </nav>

@@ -1,4 +1,4 @@
-<h1>Listing Catalog</h1>
+<h1>List Catalog</h1>
 
 <table class="table1">
   <tr>
@@ -9,8 +9,8 @@
 <% @catalogs.each do |catalog| %>
   <tr>
     <td><%= catalog.name %></td>
+    <td><%= catalog.detail%></td>
     <td><%= link_to 'Edit', edit_catalog_path(catalog) %></td>
-    <td><%= link_to 'Destroy', catalog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>

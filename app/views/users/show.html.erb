@@ -1,12 +1,14 @@
-<% provide(:title, @user.email) %>
-<div class="row">
-  <aside class="span4">
-    <section>
-      <ul>
-        <%= gravatar_for @user, size: 52 %>
-        <li><%= @user.email %></li>
-      </ul>
-      
-    </section>
-  </aside>
+Email : <p3><%= @user.email%></p3>
+<br/>
+<div class="span8">
+  <% if @user.reports.any? %>
+      <h3>Reports (<%= @user.reports.count %>)</h3>
+      <% @reports.each do |m|%>
+        	<li>Catalog :<%= m.catalog_id %></li><br/>
+          	<%= m.content %><br/>
+          		<a href="/data/<%=m.file_name%>" target="_blank"><%= m.file_name %></a>
+              Posted <%= time_ago_in_words(m.created_at) %> ago.</br>
+          <hr/>
+      <% end %>
+  <% end %>
 </div>

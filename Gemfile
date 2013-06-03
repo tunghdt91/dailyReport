@@ -9,7 +9,11 @@ gem 'will_paginate', '3.0.3'
 gem 'bootstrap-will_paginate', '0.0.6'
 gem 'jquery-rails', '2.0.2'
 gem 'paperclip'
-
+gem 'whenever'
+gem 'delayed_job_active_record'
+gem 'delayed_job_mongoid'
+gem "spreadsheet", "0.6.8"
+gem "to_xls", :git => "https://github.com/dblock/to_xls.git", :branch => "to-xls-on-models"
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'

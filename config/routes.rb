@@ -5,13 +5,15 @@ DailyReport::Application.routes.draw do
   resources :actives
   resources :reports
   resources :catalogs
-
+  resources :groups
+  resources :testmailers
   root to: 'users#home'
 
   #users
  
-  match '/create_new_account' , to: 'users#create_new_account'
   match '/all_user', to: 'users#all_user'
+  match '/update_avatar', to: 'users#update_avatar'
+  match '/xls', to: 'users#index.xls'
   #active
   match '/show_info_user', to: 'actives#show_info_user'
   match '/active_user', to: 'actives#active_user'
@@ -21,6 +23,7 @@ DailyReport::Application.routes.draw do
 
   #report
   match '/user_report', to: 'reports#index'
+  match '/group_report', to: 'groups#group_report'
 
   #match catalog
 

@@ -2,8 +2,14 @@ class UsersController < ApplicationController
 	include UsersHelper
 	#before_filter :checked_admin?, only: [:edit, :all_user]
 	
-
-	def create_new_account
+	 def index
+    	#headers['Content-Type'] = "application/vnd.ms-excel"
+    	headers['Content-Disposition'] = 'attachment; filename="report.xls"'
+    	#headers['Cache-Control'] = ''
+    	@users = User.find(:all)
+  	end
+	
+	def new
 		@user = User.new
 	end
 
@@ -20,22 +26,22 @@ class UsersController < ApplicationController
 			sign_in @user
 			redirect_to root_path
 		else
-			flash[:error] = "Email invalid !"
-			redirect_to create_new_account_path
+			
+			render 'new'
 		end
 	end
 
 	def show
-		redirect_to  root_path
-		#@user = User.find(params[:id])
-		#@microposts = @user.microposts.paginate(page: params[:page])
+		@user = User.find(params[:id])
+		@reports = @user.reports.all
 		
+		#redirect_to  root_path
 	end
 
 	def all_user
 		if  signed_in?
 			if current_user.admin?
-				@users = User.paginate(page: params[:page])
+				@users = User.paginate(page: params[:page], per_page: 20)
 				#@users = User.find_by_sql("select *from users ORDER BY created_at DESC")
 			else
 				flash[:notice] = "You do not permission !"
@@ -51,17 +57,51 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 	end
 
-	def update
+	def update  # update user and set to table group
 		@user =  User.find(params[:id].to_i)
-		group_id = params[:user][:group_id].to_i
-		if(params[:user][:password]!="")
-			@user.update_attributes(password: params[:user][:password])
+	 if params[:user].present? || params[:upload].present?
+		if params[:user].present?
+			group_id = params[:user][:group_id].to_i
+			@group = Group.new
+			@group.group_id = group_id
+			if(params[:user][:password]!="")
+				@user.update_attributes(password: params[:user][:password])
+			end
+			if(params[:user][:group_manager]=="1")
+				@user.update_attributes(group_manager: true)
+	       		@group.manager = true
+	   		else
+	    		@group.manager = false
+			end
+			
+			@group.user_id = params[:id].to_i
+			@group.save
+			@user.update_attributes(group_id: group_id)
+			flash[:success] = "Completed update"
+			redirect_to root_path
 		end
-		if(params[:user][:group_manager]=="1")
-			@user.update_attributes(group_manager: true)
-		end
-		@user.update_attributes(group_id: group_id)
-		flash[:success] = "Completed update"
-		redirect_to root_path
+		
+		if params[:upload].present?
+			name = params[:upload][:datafile].original_filename
+			directory = 'app/assets/images'
+			path = File.join(directory,name)
+	    	File.open(path, "wb") { |f| f.write(params[:upload][:datafile].read)}
+	    	if @user.update_attributes(avatar_path: name)
+			flash[:success] = "Updated avatar"
+			sign_in @user
+			redirect_to root_path
+			else
+				flash[:error] = "Error update avatar !"
+				sign_in @user
+				redirect_to root_path
+		    end
+    	end
+     else
+     	redirect_to user_path
+     end
+	end
+
+	def update_avatar
+		@user = User.find(params[:format].to_i)
 	end
 end

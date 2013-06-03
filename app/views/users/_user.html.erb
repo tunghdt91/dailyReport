@@ -1,3 +1,4 @@
+
 <table border='1' width='100%'>
 	<%@user = user%>
 	<% if user.active%>
@@ -13,7 +14,7 @@
 			<% else %>
 				<td width='10%'></td>
 			<% end %>
-			<td width='30%'><%= user.email%></td>
+			<td width='30%'><%= gravatar_for user %><%= user.email%></td>
 			<td width='30%'><%= user.created_at%></td>
 			<td width='10%'>Activated</td>
 			<td width='10%'><%= link_to "Edit User", edit_user_path(@user) %></td>

@@ -1,0 +1,21 @@
+Manager :
+<br/>
+<table border='1' width='60%'>
+<% @users_manager.each do |m| %>
+	<tr>
+		<td><%= gravatar_for(m)%></td>
+		<td><p3><%= m.email%></p3></td>
+	</tr>
+	<% end %>
+<table>
+<br/>
+Member :
+<br/>
+	<table border='1' width='60%'>
+	   	<% @users.each do |mem| %>
+			<tr>
+				<td><%= gravatar_for(mem) %></td>
+				<td><%= mem.email %></td>
+			</tr>
+		<% end %>
+	<table>

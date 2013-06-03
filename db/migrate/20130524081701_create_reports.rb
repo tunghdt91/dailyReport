@@ -5,8 +5,9 @@ class CreateReports < ActiveRecord::Migration
       t.string :content
       t.string :file_name
       t.string :file_path
-
+      t.integer :user_id
       t.timestamps
     end
+    add_index :reports, [:user_id, :create_at]
   end
 end

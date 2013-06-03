@@ -1,0 +1,23 @@
+<%= form_for @user, :html => { :multipart => true } do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@report.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+ <div id = "mainreport" >
+ <div><li>Current Avatar : <%= gravatar_for(@user)%></li></div>
+ <br/></br>
+  <label for="up">Select File</label>
+    <%= file_field 'upload', 'datafile' %>
+
+  <div class="clr"></div>
+  <div class="actions">
+    <%=f.submit "Change Avatar", class: "btn btn-large btn-primary" %>
+  </div>
+<% end %>
