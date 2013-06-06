@@ -1,0 +1,87 @@
+<% groupname = Namegroup.find_by_sql("select * from namegroups where group_id=#{current_user.group_id}")[0].group_name%>
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Styles>
+      <Style ss:ID="Default" ss:Name="Normal">  
+                    <Alignment ss:Vertical="Center"/>  
+                    <Borders>
+                    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="0.5"/>
+                    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="0.5"/>
+                    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="0.5"/>
+                    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="0.5"/>
+                    </Borders>
+                    <Font />  
+                    <Interior />  
+                    <NumberFormat />  
+                    <Protection />  
+      </Style>
+
+    <Style ss:ID="s23">
+          <Alignment ss:Horizontal="Center" ss:Vertical="Left"/> 
+          <Font ss:Size="14" ss:Bold="5" ss:Color="#FF0000"/>
+          <Interior ss:Color="#FFCC00" ss:Pattern="Solid"/>
+    </Style>
+    
+      <Style ss:ID="s20">
+          <Alignment ss:Horizontal="Justify"/>
+      </Style>
+    
+      <Style ss:ID="s24">
+          <Alignment ss:Horizontal="Center"/>
+          <Font ss:Size="8" ss:Bold="1" />
+          <Interior ss:Color="#DDDDDD" ss:Pattern="Solid"/>
+      </Style>
+  
+      <Style ss:ID="s25">
+          <Alignment ss:Rotate="45" ss:Horizontal="Center"/>
+          <Font ss:Size="8" ss:Bold="1" ss:Color="#0033CC"/>
+          <Interior ss:Color="#DDDDDD" ss:Pattern="Solid"/>
+      </Style>
+
+      <Style ss:ID="s26">
+          <Alignment ss:Horizontal="Center"/>
+          <Font ss:Size="20" ss:Bold="2" ss:Color="#0033CC"/>
+      </Style>
+  </Styles>
+<!--End of style-->
+  <Worksheet ss:Name="Sheet1">
+      <%catalogs = Report.find_by_sql("select DISTINCT  catalog_id from reports ORDER BY created_at ASC") %>
+      <% tmp = catalogs.count-1%>
+    <Table>
+
+      <Column  ss:AutoFitWidth="0" ss:Width="100"/>
+      <% for i in 0..tmp %>
+      <Column  ss:AutoFitWidth="1" ss:Width="150"/>
+      <%end%>
+      <Row ss:Height="30">
+        <Cell ss:StyleID="s26" ss:MergeAcross="<%= catalogs.count%>" ><Data ss:Type="String"><%=groupname%></Data></Cell>
+      </Row>
+      <Row ss:Height="100" >
+        <Cell ss:StyleID="s23"><Data ss:Type="String">User|Catalog</Data></Cell>
+        <% for i in 0..tmp %>
+        <Cell ss:StyleID="s23"><Data ss:Type="String"><%= Catalog.find(catalogs[i].catalog_id.to_i).name%></Data></Cell>
+        <% end %>
+      </Row>
+
+      <% @users.each do |user| %>
+        <Row ss:Height="150" >
+          <Cell ss:StyleID="s25"><Data ss:Type="String"><%= user.email%> </Data></Cell>
+              <% for i in 0..tmp %>
+                <% temp = "" %>
+                <% count = 0 %>
+                <!--if this user have report to catalog i-->
+                <% reports_of_user = Report.find_by_sql("select *from reports where user_id=#{user.id} and catalog_id=#{catalogs[i].catalog_id.to_i} ORDER BY created_at DESC")%>
+                    <% reports_of_user.each do |r|%>
+                      <% temp +=( (count+=1).to_s + "> " + r.created_at.to_s + "\n" + r.content +  "\nlocalhost:3000/data/...\n\n\n\n") %>
+                    <% end %>
+                  <Cell ss:StyleID="s20"><Data ss:Type="String"><%= temp%></Data></Cell>
+              <% end %>
+          </Row>
+      <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

@@ -1,0 +1,2 @@
+module NamegroupsHelper
+end

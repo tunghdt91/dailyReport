@@ -4,7 +4,7 @@ Email : <p3><%= @user.email%></p3>
   <% if @user.reports.any? %>
       <h3>Reports (<%= @user.reports.count %>)</h3>
       <% @reports.each do |m|%>
-        	<li>Catalog :<%= m.catalog_id %></li><br/>
+        	<li>Catalog :<%= Catalog.find(m.catalog_id).name %></li><br/>
           	<%= m.content %><br/>
           		<a href="/data/<%=m.file_name%>" target="_blank"><%= m.file_name %></a>
               Posted <%= time_ago_in_words(m.created_at) %> ago.</br>

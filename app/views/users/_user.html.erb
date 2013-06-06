@@ -4,7 +4,7 @@
 	<% if user.active%>
 		<tr height= "50px", align = "center">
 			<td width='5%'><%= user.id%></td>
-			<% if user.group_id==6 %>
+			<% if user.group_id==1 %>
 				<td width='5%'><p3><b><%= user.group_id%></b></p3></td>
 			<% else %>
 				<td width='5%'><%= user.group_id%></td>
@@ -22,7 +22,7 @@
 	<%else%>
 		<tr height= "50px", align = "center">
 			<td width='5%'><p3><%= user.id%></p3></td>
-			<% if user.group_id==6 %>
+			<% if user.group_id==1 %>
 				<td width='5%'><p3><b><%= user.group_id%></b></p3></td>
 			<% else %>
 				<td width='5%'><p3><%= user.group_id%></p3></td>

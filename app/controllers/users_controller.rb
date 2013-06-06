@@ -20,6 +20,10 @@ class UsersController < ApplicationController
 		if @user.save
 			UserMailer.welcome_email(@user).deliver
 			UserMailer.mail_to_admin(@user).deliver
+			@group =  Group.new
+			@group.user_id = @user.id
+			@group.save
+
 			if !@user.active
 			flash[:notice] = "Thank You !Your Account is Created.Please wait admin active !"
 			end
@@ -61,8 +65,8 @@ class UsersController < ApplicationController
 		@user =  User.find(params[:id].to_i)
 	 if params[:user].present? || params[:upload].present?
 		if params[:user].present?
+			@group = Group.find_by_user_id(params[:id].to_i)
 			group_id = params[:user][:group_id].to_i
-			@group = Group.new
 			@group.group_id = group_id
 			if(params[:user][:password]!="")
 				@user.update_attributes(password: params[:user][:password])
@@ -70,12 +74,23 @@ class UsersController < ApplicationController
 			if(params[:user][:group_manager]=="1")
 				@user.update_attributes(group_manager: true)
 	       		@group.manager = true
-	   		else
+	   			@group.update_attributes(r: true)
+	   			@group.update_attributes(e: true)
+	   			@group.update_attributes(d: true)
+	   		end
+	   		if(params[:user][:group_manager]=="0")
+	   			@user.update_attributes(group_manager: false)
 	    		@group.manager = false
+	    		@group.update_attributes(r: false)
+	    		@group.update_attributes(e: false)
+	    		@group.update_attributes(d: false)
 			end
 			
-			@group.user_id = params[:id].to_i
-			@group.save
+			if !Namegroup.find_by_group_id(group_id).present?
+				@group_name = Namegroup.new
+				@group_name.group_id = group_id
+				@group_name.save
+			end
 			@user.update_attributes(group_id: group_id)
 			flash[:success] = "Completed update"
 			redirect_to root_path
@@ -103,5 +118,6 @@ class UsersController < ApplicationController
 
 	def update_avatar
 		@user = User.find(params[:format].to_i)
+
 	end
 end

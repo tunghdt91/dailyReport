@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  	<Styles>
+    	<Style ss:ID="Default" ss:Name="Normal">  
+                    <Alignment ss:Vertical="Center"/>  
+                    <Borders>
+                    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="0.5"/>
+                    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="0.5"/>
+                    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="0.5"/>
+                    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="0.5"/>
+                    </Borders>
+                    <Font />  
+                    <Interior />  
+                    <NumberFormat />  
+                    <Protection />  
+    	</Style>
+
+ 		<Style ss:ID="s23">
+      		<Alignment ss:Horizontal="Center" ss:Vertical="Left"/> 
+      		<Font ss:Size="14" ss:Bold="5" ss:Color="#FF0000"/>
+      		<Interior ss:Color="#880000" ss:Pattern="Solid"/>
+		</Style>
+  	
+  		<Style ss:ID="s20">
+      		<Alignment ss:Horizontal="Justify"/>
+    	</Style>
+  	
+  		<Style ss:ID="s24">
+      		<Alignment ss:Horizontal="Center"/>
+      		<Font ss:Size="8" ss:Bold="1" />
+      		<Interior ss:Color="#DDDDDD" ss:Pattern="Solid"/>
+  		</Style>
+  
+  		<Style ss:ID="s25">
+  	  		<Alignment ss:Horizontal="Center"/>
+      		<Font ss:Size="8" ss:Bold="1" ss:Color="#0033CC"/>
+      		<Interior ss:Color="#DDDDDD" ss:Pattern="Solid"/>
+  		</Style>
+
+  		<Style ss:ID="s26">
+      		<Alignment ss:Horizontal="Center"/>
+      		<Font ss:Size="20" ss:Bold="2" ss:Color="#0033CC"/>
+  		</Style>
+ 	</Styles>
+
+  <Worksheet ss:Name="Sheet1">
+  	<%catalogs = Report.find_by_sql("select DISTINCT  catalog_id from reports WHERE user_id=#{@user.id} ORDER BY created_at ASC") %>
+  	<% tmp = catalogs.count-1%>
+  	
+  	<Table>
+  		<Column  ss:AutoFitWidth="0" ss:Width="100"/>
+  		<% for i in 0..tmp %>
+      		<Column  ss:AutoFitWidth="1" ss:Width="150"/>
+      	<%end%>
+      	<Row ss:Height="30">
+        	<Cell ss:StyleID="s26" ss:MergeAcross="<%= catalogs.count%>" ><Data ss:Type="String"><%=@user.email%></Data></Cell>
+      	</Row>
+
+      	<Row ss:Height="100" >
+        	<Cell ss:StyleID="s23"><Data ss:Type="String">User|Catalog</Data></Cell>
+        	<% for i in 0..tmp %>
+        		<Cell ss:StyleID="s23"><Data ss:Type="String"><%= Catalog.find(catalogs[i].catalog_id.to_i).name%></Data></Cell>
+  	      	<% end %>
+      	</Row>
+      	<% @reports_date = Report.group('date(created_at)')%>
+      	<% @reports_date.each do |r| %>
+      		 <Row ss:Height="150" >
+      		 	<Cell ss:StyleID="s25"><Data ss:Type="String"><%= r.created_at.day%>-<%= r.created_at.month%>-<%= r.created_at.year%> </Data></Cell>
+            <% time_open_day = fix_date(r.created_at.year,r.created_at.month,r.created_at.day)%>
+            <% temp2 = r.created_at + 24.hour%>
+            <% time_close_day = fix_date(temp2.year, temp2.month, temp2.day)%> <!-- return yyyy-mm-dd-->
+
+      		 	<% for i in 0..tmp %>
+              <%temp =""%>
+              <% query ="SELECT *from reports where user_id=#{@user.id} and catalog_id=#{catalogs[i].catalog_id.to_i} and created_at between '#{time_open_day}' and '#{time_close_day}'" %>
+              <% @reports_this_user = Report.find_by_sql(query)%>
+              <% @reports_this_user.each do |rr|%>
+                <% temp += (rr.content + "\n\n") %>
+              <%end%>
+      		 		<Cell ss:StyleID="s20"><Data ss:Type="String"><%= temp%></Data></Cell> 
+      		 	<%end%>
+      		 </Row>
+      	<%end%>
+  	</Table>
+  </Worksheet>
+</Workbook>

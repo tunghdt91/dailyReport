@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :active, :email, :password, :password_confirmation, :group_id, :group_manager, :avatar_path
+  attr_accessible :active, :admin, :md5, :email, :password, :password_confirmation, :group_id, :group_manager, :avatar_path
   has_secure_password
   has_many :reports
   belongs_to :group

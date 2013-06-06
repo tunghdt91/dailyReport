@@ -4,6 +4,6 @@ class Report < ActiveRecord::Base
 
   validates :content, presence: true
   validates :catalog_id, presence: true
-  
+
 default_scope order: 'reports.created_at DESC'
 end

@@ -6,6 +6,8 @@ class CatalogsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @catalogs }
+      format.xls
+      format.csv { send_data @catalogs.to_csv }
     end
   end
 

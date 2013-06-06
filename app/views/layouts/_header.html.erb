@@ -26,12 +26,13 @@
                     <b class="caret"></b>
                   </a>
                 <ul class="dropdown-menu">
-                  <li><%= link_to "View Report", group_report_path(current_user) %></li>
-                  <li><%= link_to "Member",group_path(current_user)%></li>
+                  <li><%= link_to "Group Report", group_report_path(current_user) %></li>
+                  <li><%= link_to "Group Member",group_path(current_user)%></li>
+                  <li><%= link_to "Change Group Name",setname_path()%></li>
                 </ul>
               </li>
               
-              <li><%= gravatar_for(current_user,size: 35) %></li>  
+                
               <li id="fat-menu" class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <p2><%= current_user.email %></p2>
@@ -44,6 +45,7 @@
                   <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
                 </ul>
               </li>
+              <li><%= gravatar_for(current_user,size: 35) %></li>
             <%else%>
                    <li><%= link_to "Signin", signin_path %></li>
         	        <li><%= link_to "Signup", new_user_path%></li>

@@ -1,0 +1,36 @@
+User Email: <p3><%= User.find(@group.user_id).email%></p3>
+<br/>
+<hr/>
+<%= form_for(@group) do |f| %>
+
+	<table width='60%' border = '1'>
+		<tr height= "30px", align = "center" bgcolor = "#CCFF33">
+			<td><%= f.label :'Read' %></td>
+			<td><%= f.label :'Edit' %></td>
+			<td><%= f.label :'delete' %></td>
+		</tr>
+		<tr>
+		<td align='center'><div class="field">
+         	<%= f.radio_button :r, '0'%> No | 
+    	 	<%= f.radio_button :r, '1'%> Yes
+ 			</div>
+		</td>
+		<td align='center'><div class="field">
+	   	 	<%= f.radio_button :e, '0'%> No | 
+    		<%= f.radio_button :e, '1'%> Yes
+  			</div>
+		</td>
+		<td align='center'><div class="field">
+		    <%= f.radio_button :d, '0'%> No |  
+   			<%= f.radio_button :d, '1'%> Yes
+  			</div>
+		</td>			
+		</tr>
+	<table>
+  <br/> 
+  <br/> 
+  <input type="hidden" name ="id" value = <%=@group.id %>>
+  <div class="actions">
+    <%=f.submit "Save", class: "btn btn-large btn-primary" %>
+  </div>
+<% end %>

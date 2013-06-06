@@ -60,7 +60,7 @@ module SessionsHelper
 
   def check_admin
     unless signed_in? && current_user.admin?
-      flash[:errors] = "Only administrator can view pages !"
+      flash[:errors] = "Only administrator can use it !"
      redirect_to root_url  
     
     end
@@ -83,4 +83,35 @@ module SessionsHelper
       redirect_to root_path
     end
   end
+
+  def checked_manager
+    unless signed_in? && current_user.group_manager?
+      flash[:errors] = "You not manager group !"
+     redirect_to root_path
+    
+    end
+  end
+
+  def checked_read
+    unless signed_in? && (Group.find_by_user_id(current_user.id).r? || current_user.admin?)
+      flash[:errors] = "You Not Permission Read this Pages."
+     redirect_to root_path
+    
+    end
+  end
+
+  def fix_date(year,month,day)
+    if day<10 && month<10
+      result = year.to_s + '-0' + month.to_s + '-0' + day.to_s 
+    end
+
+    if day<10 && month>9
+      result = year.to_s + '-' + month.to_s + '-0' + day.to_s 
+    end
+    if day>9 && month<10
+      result = year.to_s + '-0' + month.to_s + '-' + day.to_s 
+    end
+    return result
+  end
+
 end

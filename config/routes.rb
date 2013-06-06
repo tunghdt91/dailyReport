@@ -7,6 +7,7 @@ DailyReport::Application.routes.draw do
   resources :catalogs
   resources :groups
   resources :testmailers
+  resources :namegroups
   root to: 'users#home'
 
   #users
@@ -23,10 +24,15 @@ DailyReport::Application.routes.draw do
 
   #report
   match '/user_report', to: 'reports#index'
+  #groups
   match '/group_report', to: 'groups#group_report'
-
+  match '/member_report', to: 'groups#member_report'
   #match catalog
+  #namegroup
+  match '/setname', to: 'namegroups#setname'
 
+  #groups
+  match '/set_role', to: 'groups#set_role'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

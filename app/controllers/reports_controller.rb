@@ -14,11 +14,11 @@ class ReportsController < ApplicationController
 
 	def create
 		@report = Report.new(params[:report])
-		if params[:upload].present?
-			name = params[:upload][:datafile].original_filename
+		if params[:datafile].present?
+			name = params[:datafile].original_filename
 			directory = 'public/data'
 			path = File.join(directory,name)
-	    	File.open(path, "wb") { |f| f.write(params[:upload][:datafile].read)}
+	    	File.open(path, "wb") { |f| f.write(params[:datafile].read)}
 	    	@report.file_name = name
 	    	@report.file_path = path	
 		end
