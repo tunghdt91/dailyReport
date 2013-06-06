@@ -1,6 +1,6 @@
 <h2>  <%= Namegroup.find_by_sql("SELECT group_name from namegroups where group_id=#{current_user.group_id}")[0].group_name %>(ID: <p3><%=current_user.group_id%></p3>)<br/></h2>
 <p3>
-  Download All Report of Group:
+  Save All : >>
   <%= link_to "Excel", group_report_path(format: "xls") %>
 </p3>
 
@@ -25,7 +25,8 @@
           <% for i in 0..tmp %>
           <% @count = 0 %>
           <% reports_of_user = Report.find_by_sql("select *from reports where user_id=#{user.id} and catalog_id=#{catalogs[i].catalog_id.to_i} ORDER BY created_at DESC")%>
-            <td>
+            <td  >
+              <div id="scrollcell">
                 <% reports_of_user.each do |r|%>
                   
                   <ul>
@@ -35,13 +36,14 @@
                     <span class="timestamp"><%= r.created_at %> (<%= time_ago_in_words(r.created_at) %>ago)</span>
                   </ul>
                 <% end %>
+              </div>
             </td>
           <% end %>
         </tr>
        </table>
        <br/>
        <p>
-  Download Report this User:
+  Save:>>
   <%= link_to "Excel", member_report_path(user) %>
 </p>
     <% end %>
