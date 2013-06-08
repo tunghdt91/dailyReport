@@ -1,5 +1,5 @@
 
-<table border='1' width='100%'>
+<table  width='100%'>
 	<%@user = user%>
 	<% if user.active%>
 		<tr height= "50px", align = "center">
@@ -34,9 +34,10 @@
 			<% end %>
 			<td width='30%'><p3><%= user.email%></p3></td>
 			<td width='30%'><p3><%= user.created_at%></p3></td>
-			<td width='10%'><%= link_to "Active Now", show_info_user_path(@user) %></td>
+			<td width='10%'><%= link_to "Active Now", show_info_user_path(@user), class: "btn btn-small btn-primary"%></td>
 			<td width='10%'><%= link_to "Edit User", edit_user_path(user) %></td>
 
 		</tr>
 	<%end%>
+	<hr/>
 </table>

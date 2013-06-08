@@ -1,3 +1,6 @@
+<h2>  <%= Namegroup.find_by_sql("SELECT group_name from namegroups where group_id=#{current_user.group_id}")[0].group_name %>(ID: <p3><%=current_user.group_id%></p3>)<br/></h2>
+<hr/>
+
 Manager :(<b>Read-Edit-Delete</b>)
 <br/>
 <table width='60%'>

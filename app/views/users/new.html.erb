@@ -1,13 +1,15 @@
 <% provide(:title, 'Create New Account') %>
-<h3>Bạn đã chọn tạo một tài khoản mới.Vui lòng đọc các điều khoản sử dụng</h3>
-
+<h3 style="font-size: 12px ;color:#FF3333 ;margin-left: 20px" >Bạn đã chọn tạo một tài khoản mới.Vui lòng đọc các điều khoản sử dụng(*)</h3>
+<br/>
+</br>
+<div id='form-input'>
 <div class="row">
   <div class="span6 offset3">
     <%= form_for(@user) do |f| %>
      <%= render 'shared/error_messages'%>
 
-      <%= f.label :email %>
-      <%= f.text_field :email %>
+      <%= f.label :'email(*)' %>
+      <%= f.text_field :email, placeholder: 'example@framgia.com'%>
       Điều khoản sử dụng
             <textarea rows="6" cols="50">
                ĐỌC RÕ CÁC QUY ĐỊNH CỦA TRANG WEB
@@ -56,6 +58,7 @@ Thân,
             </div>
     <% end %>
   </div>
+</div>
 </div>
  
 

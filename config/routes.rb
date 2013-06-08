@@ -8,7 +8,7 @@ DailyReport::Application.routes.draw do
   resources :groups
   resources :testmailers
   resources :namegroups
-  root to: 'users#home'
+  root to: 'static_pages#home'
 
   #users
  
@@ -33,6 +33,14 @@ DailyReport::Application.routes.draw do
 
   #groups
   match '/set_role', to: 'groups#set_role'
+
+  #static_pages
+  match '/faq_create_account', to: 'static_pages#faq_create_account'
+  match '/faq_changepasswd', to: 'static_pages#faq_changepasswd'
+  match '/faq_why_report', to: 'static_pages#faq_why_report'
+  match '/faq_contact_manager', to: 'static_pages#faq_contact_manager'
+  match '/faq_aboutsite', to: 'static_pages#faq_aboutsite'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
