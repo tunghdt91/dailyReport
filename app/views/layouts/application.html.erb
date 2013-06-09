@@ -10,115 +10,14 @@
 <!--End of header-->
 <body>
 	<div id="wrapper">
-		<div id="header">
-			<div id='logo'>
-			</div>
-
-			<div id='banner'>
-				<img src="/images/banner.jpg" alt="framgia banner" />
-			</div>
-		</div> <!--End header-->
+		<%= render 'layouts/header' %> 
 		
 		<div id="content">
-			<div id="sidebar">
-        <p>Search this site</p>
-				<div id="search">
-					<form method='get' action='#'>
-						<input type='text' size='5' name='search' placeholder='type text here...' />
-						<input type='submit' value='search' class='btn btn-medium btn-primary' />
-					</form>
-				</div> <!--End of search sidebar-->
-
-        <div id='divider-form'></div>
-
-				<div id="faq">
-					<h2 style="color:#33FFFF;">FAQs<br/>**********</h2>
-					<ul>
-						<li>
-            <li> <%= link_to '- How do create account ?' ,faq_create_account_path %></li>
-            <li> <%= link_to '- Change password ?' ,faq_changepasswd_path %></li>
-            <li> <%= link_to '- Why Report ?' ,faq_why_report_path %></li>
-            <li> <%= link_to '- Contact Manager' ,faq_contact_manager_path %></li>
-            <li> <%= link_to '- About WebSite' ,faq_aboutsite_path %></li>
-					</ul>
-				</div> <!--End of faq sidebar-->
-
-        <div id='divider-form'></div>
-
-        <% users = User.where('created_at').last(10)%>
-				<div id="new-member">
-					<h2 style="color:#33FFFF;">New Member<br/>**********</h2>
-					<ul>
-            <% for i in 0..9 %>
-						  <li>
-                <%= gravatar_for(users[9-i],20) %>
-                <%=users[9-i].email%>
-                <span class="timestamp">(<%= time_ago_in_words(users[9-i].created_at) %>   ago)</span>
-						  </li>
-              <hr/>
-            <%end%>
-					</ul>
-				</div><!--end of news-->
-			</div> <!--End of sidebar-->
-			<!--End of side bar-->
+			<%= render 'layouts/slide_bar' %> 
 			
 			<div id="primary"> 
-				
-        <div id='navBar'>
-          <div id='quick-report'>
-            <%= link_to 'Report' ,new_report_path,class: "btn btn-large btn-primary"%>
-          </div>
-          
-          <div id='menu-bar'>
-            <ul>
-              <% if signed_in? %>
-                <% if checked_admin?%>
-                  <li> <%= link_to 'Manager User' ,all_user_path,class: "btn btn-large btn-primary"%></li>
-                  <li id="fat-menu" class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                     <p4>Catelog</p4>
-                      <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                     <li><%= link_to "New", new_catalog_path %></li>
-                     <li><%= link_to "Show all", catalogs_path %></li>
-                    </ul>
-                  </li>
-                <%end%>
-          
-                <li id="fat-menu" class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                      <p4>Group</p4>
-                       <b class="caret"></b>
-                    </a>
-                  <ul class="dropdown-menu">
-                    <li><%= link_to "Group Report", group_report_path(current_user) %></li>
-                    <li><%= link_to "Group Member",group_path(current_user)%></li>
-                    <li><%= link_to "Change Name",setname_path()%></li>
-                  </ul>
-                </li>
-
-                <li id="fat-menu" class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <p2 style='color:#0066FF'><%= current_user.email %></p2>
-                        <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><%= link_to "My Report", user_path(current_user) %></li>
-                        <li><%= link_to "Change Avatar", update_avatar_path(current_user) %></li>
-                        <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
-                    </ul>
-                </li>
-
-                <li><%= gravatar_for(current_user,size: 35) %></li>
-              <%else%>
-                 <li><%= link_to "Signin", signin_path,class: "btn btn-large btn-primary" %></li>
-                 <li><%= link_to "Signup", new_user_path,class: "btn btn-large btn-primary"%></li>
-              <%end%>
-            </ul>
-          </div> <!--End of menubar -->
-        </div><!-- End of navbar  -->
-
+				<%= render 'layouts/nav_bar' %> 
+        
         <div id='quick-link'>
             <ul id="small-nav">
               <li><a href= <%= root_path%>>Home  |  </a></li>
@@ -137,24 +36,7 @@
 			<div class='clear'></div> <!--Clear both-->
 		</div> <!--End content-->
 
-		<div id="footer">
-			<div id="footer-left">
-				<a href='http://framgia.com/vn'>Copyright &copy; Framgia Vn 2013-2014</a>	
-			</div> <!--End of footer-left-->
-
-			<div id='footerNav'>
-				<ul id="footer-right">
-			   		<li><a href='#'>Homepage</a></li>
-			   		<li><a href='#'>Tutorial</a></li>
-				  	<li><a href='#'>CSS</a></li>
-			   		<li><a href='#'>HTML</a></li>
-			   		<li><a href='#'>Wordpress</a></li>
-					 <li><a href='#'>Forum</a></li>
-				  	<li><a href='#'>FAQs</a></li>
-					 <li><a href='#'>Contact</a></li>
-				</ul>
-			</div> <!--end of footerNav-->
-		</div> <!--End of footer-->
+		<%= render 'layouts/footer' %> 
 	</div> <!--End wrapper-->
 
 	<%= debug(params) if Rails.env.development? %>

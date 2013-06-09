@@ -1,3 +1,40 @@
+<p style="font-family: Arial; font-style: bold; font-size: 18px; color: red">This is all report of Group
+</p>
+<hr/>
+Advance Search:<br/>
+<%= form_for @users, url: find_report_user_path do |f|%>
+
+  <%= f.collection_select :email,
+      @users, :id, :email,include_blank: true%> 
+  Day<input type='text' name='find_day' size='2' maxleng='2'/>
+  Month<input type='text' name='find_month' size='2' maxleng='2'/>
+  Year<input type='text' name='find_year' size='4' maxleng='4'/>
+  <%=f.submit "Search", class: "btn btn-large btn-primary" %>
+<% end %>
+
+<!-- end find of users -->
+<!-- find in group -->
+<form action = <%=find_report_group_path%> >
+  Day<input type='text' name='find_day' size='2' maxleng='2'/>
+  Month<input type='text' name='find_month' size='2' maxleng='2'/>
+  Year<input type='text' name='find_year' size='4' maxleng='4'/>
+  <input type='submit' value ="Search" %>
+</form>
+
+<!-- end find gorup -->
+
+
+
+
+
+
+
+
+
+
+
+
+<hr/>
 <h2>  <%= Namegroup.find_by_sql("SELECT group_name from namegroups where group_id=#{current_user.group_id}")[0].group_name %>(ID: <p3><%=current_user.group_id%></p3>)<br/></h2>
 <p3>
   Save All : >>
@@ -33,7 +70,7 @@
                     <li><p3><%= @count+=1 %>-</p3> <%= r.content %></li>
                     <span class="file_attach">
                     <a href="/data/<%=r.file_name%>" target="_blank"><%= r.file_name %></a>
-                    <span class="timestamp"><%= r.created_at %> (<%= time_ago_in_words(r.created_at) %>ago)</span>
+                    <span class="timestamp"><%= r.created_at.strftime("%B %e,%Y") %> (<%= time_ago_in_words(r.created_at) %>ago)</span>
                   </ul>
                 <% end %>
               </div>

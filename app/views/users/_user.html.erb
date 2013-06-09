@@ -15,7 +15,7 @@
 				<td width='10%'></td>
 			<% end %>
 			<td width='30%'><%= gravatar_for user %><%= user.email%></td>
-			<td width='30%'><%= user.created_at%></td>
+			<td width='30%'><%= user.created_at.strftime("%B %e,%Y")%></td>
 			<td width='10%'>Activated</td>
 			<td width='10%'><%= link_to "Edit User", edit_user_path(@user) %></td>
 		</tr>
@@ -33,7 +33,7 @@
 				<td width='10%'></td>
 			<% end %>
 			<td width='30%'><p3><%= user.email%></p3></td>
-			<td width='30%'><p3><%= user.created_at%></p3></td>
+			<td width='30%'><p3><%= user.created_at.strftime("%B %e,%Y")%></p3></td>
 			<td width='10%'><%= link_to "Active Now", show_info_user_path(@user), class: "btn btn-small btn-primary"%></td>
 			<td width='10%'><%= link_to "Edit User", edit_user_path(user) %></td>
 

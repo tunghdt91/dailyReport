@@ -1,0 +1,5 @@
+<%this_group = Namegroup.find_by_sql("select group_name from namegroups where group_id = '#{current_user.group_id}'")[0]%>
+<%= link_to "Back",group_report_path%><br/>
+Search report of : <p style="font-style: bold; color: orange"><%= this_group.group_name%></p> 
+Date:  <p3><%= @find_day%>- <%= @find_month%>- <%= @find_year%></p3>
+

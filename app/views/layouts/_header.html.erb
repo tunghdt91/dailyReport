@@ -1,60 +1,8 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
-  <div class="navbar-inner">
-    <div class="container">
-    	<%= link_to "dailyReport", root_path, id: "logo" %>
-    	<nav>
-        <ul class="nav pull-right">
-          <li> <%= link_to 'Report' ,new_report_path,class: "btn btn-large btn-primary"%></li>
-          <% if signed_in? %>
-            <% if checked_admin?%>
-              <li> <%= link_to 'Manager User' ,all_user_path,class: "btn btn-large btn-primary"%></li>
-              <li id="fat-menu" class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <p4>Catelog</p4>
-                  <b class="caret"></b>
-                </a>
-               <ul class="dropdown-menu">
-                  <li><%= link_to "New", new_catalog_path %></li>
-                  <li><%= link_to "Show all", catalogs_path %></li>
-                </ul>
-              </li>
-              <!--admin menu-->
-            <%end%>
-              <li id="fat-menu" class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <p4>Group</p4>
-                    <b class="caret"></b>
-                  </a>
-                <ul class="dropdown-menu">
-                  <li><%= link_to "Group Report", group_report_path(current_user) %></li>
-                  <li><%= link_to "Group Member",group_path(current_user)%></li>
-                  <li><%= link_to "Change Group Name",setname_path()%></li>
-                </ul>
-              </li>
-              
-                
-              <li id="fat-menu" class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <p2><%= current_user.email %></p2>
-                  <b class="caret"></b>
-                </a>
-               <ul class="dropdown-menu">
-                  <li><%= link_to "My Report", user_path(current_user) %></li>
-                  <li><%= link_to "Change Avatar", update_avatar_path(current_user) %></li>
-                  <li class="divider"></li>
-                  <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
-                </ul>
-              </li>
-              <li><%= gravatar_for(current_user,size: 35) %></li>
-            <%else%>
-                   <li><%= link_to "Signin", signin_path %></li>
-        	         <li><%= link_to "Signup", new_user_path%></li>
-            <%end%>
-        </ul>
-    </nav>
-    </div>
-  </div>
-</header>
+<div id="header">
+      <div id='logo'>
+      </div>
 
-
- 
+      <div id='banner'>
+        <img src="/images/banner.jpg" alt="framgia banner" />
+      </div>
+    </div> <!--End header-->

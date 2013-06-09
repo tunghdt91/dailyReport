@@ -114,4 +114,12 @@ module SessionsHelper
     return result
   end
 
+  def check_input_form_user(y,m)
+    if 0<y.to_i && 0<m.to_i && m.to_i<13
+      return true
+    else
+      return false
+    end
+  end
+
 end

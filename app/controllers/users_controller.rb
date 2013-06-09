@@ -1,12 +1,18 @@
 class UsersController < ApplicationController
 	include UsersHelper
-	#before_filter :checked_admin?, only: [:edit, :all_user]
+	before_filter :check_admin, only: [:index]
 	
-	 def index
-    	#headers['Content-Type'] = "application/vnd.ms-excel"
-    	headers['Content-Disposition'] = 'attachment; filename="report.xls"'
-    	#headers['Cache-Control'] = ''
-    	@users = User.find(:all)
+	def index
+		@search = User.search(params[:q])
+		@users = @search.result
+		#@users = User.paginate(page: params[:page], per_page: 20)
+    	@search.build_condition if @search.conditions.empty?
+    	@search.build_sort if @search.sorts.empty?
+    end
+
+  	def search
+  		index
+  		render :index
   	end
 	
 	def new
@@ -37,25 +43,10 @@ class UsersController < ApplicationController
 
 	def show
 		@user = User.find(params[:id])
-		@reports = @user.reports.all
-		
+		@reports = @user.reports.all	
 		#redirect_to  root_path
 	end
 
-	def all_user
-		if  signed_in?
-			if current_user.admin?
-				@users = User.paginate(page: params[:page], per_page: 20)
-				#@users = User.find_by_sql("select *from users ORDER BY created_at DESC")
-			else
-				flash[:notice] = "You do not permission !"
-				redirect_to root_path
-			end
-		else
-			flash[:error] = "Please login !"
-			redirect_to root_path
-		end
-	end
 
 	def edit
 		@user = User.find(params[:id])

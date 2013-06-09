@@ -1,6 +1,8 @@
 DailyReport::Application.routes.draw do
 
-  resources :users
+  resources :users do
+    collection { post :search, to: 'users#index' }
+  end
   resources :sessions
   resources :actives
   resources :reports
@@ -12,9 +14,9 @@ DailyReport::Application.routes.draw do
 
   #users
  
-  match '/all_user', to: 'users#all_user'
   match '/update_avatar', to: 'users#update_avatar'
   match '/xls', to: 'users#index.xls'
+
   #active
   match '/show_info_user', to: 'actives#show_info_user'
   match '/active_user', to: 'actives#active_user'
@@ -24,16 +26,19 @@ DailyReport::Application.routes.draw do
 
   #report
   match '/user_report', to: 'reports#index'
+  
   #groups
   match '/group_report', to: 'groups#group_report'
   match '/member_report', to: 'groups#member_report'
-  #match catalog
+  
   #namegroup
   match '/setname', to: 'namegroups#setname'
 
   #groups
   match '/set_role', to: 'groups#set_role'
-
+  match '/find_report_user', to: 'groups#find_report_user'
+  match '/find_report_group', to: 'groups#find_report_group'
+  
   #static_pages
   match '/faq_create_account', to: 'static_pages#faq_create_account'
   match '/faq_changepasswd', to: 'static_pages#faq_changepasswd'

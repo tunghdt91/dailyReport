@@ -14,6 +14,7 @@ gem 'delayed_job_active_record'
 gem 'delayed_job_mongoid'
 gem "spreadsheet", "0.6.8"
 gem "to_xls", :git => "https://github.com/dblock/to_xls.git", :branch => "to-xls-on-models"
+gem 'ransack'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'

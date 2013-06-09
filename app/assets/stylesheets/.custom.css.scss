@@ -1,270 +1,6 @@
 @import "bootstrap";
 
 
-/*Reset CSS setting*/
-html, body, span, div, h1, h2, h3, h4, strong,
-ol, ul, li {
-margin: 0;
-padding: 0;
-border: 0;
-outline: 0;
-vertical-align: baseline;
-background: transparent;
-}
-
-body {
-font-size: 90%;
-font-family: helvetica,arial;
-line-height: 1.5;
-}
-
-ol,ul{
-list-style: none;
-}
-
-a {
-text-decoration: none;
-}
-
-a.hover {
-text-decoration: underline;
-}
-
-.clear {
-clear: both;
-}
-
-a img{
-border: none;
-}
-#wrapper {
-width: 1100px;
-margin: 1px auto;
-border: 0px solid #BBBBBB;
-}
-/* END RESET*/
-#header {
-width: auto;
-height: 250px;
-}
-
-#header div#logo {
-float: left;
-text-align: center;
-width: 200px; height: 250px;
-background: url(/images/logo.jpg) repeat-x top
-}
-
-
-
-#header div#banner {
-width: 900px;
-height: 250px;
-float: right;
-background: url(/images/banner.jpg) repeat-x repeat-y;
-}
-
-/* Content*/
-#content {
-width: 1100px;
-height: auto;
-}
-
-/* open siderbar*/
-#content div#sidebar{
-width: 200px;
-height: auto;
-text-align: center;
-float: left;
-background: url(/images/sidebar.png) repeat;
-border: 1px  orange;
-color: orange;
-}
-#content div#search{
- margin: 1px 3px 1px 3px;
-}
-
-#content div#divider-form{
-	margin-top: 20px;
-	width: 160px;
-	height: 4px;
-	margin-left: 20px;
-	margin-left: 20px;
-	border-bottom: 2px solid #FF0000;
-
-}
-/*end slide bar*/
-#content div#faq{
-margin-top: 20px;
-margin-left: 5px;
-text-align: left;
-font-style: bold;
-color:#00FF33;
-
-}
-
-
-#content div#faq ul li a{
-line-height: 30px;
-color:#FF9900;
-}
-
-#content div#new-member{
-	margin-top: 15px;
-  margin-left: 10px;
-}
-#content div#new-member ul li{
-	text-align: left;
-	font-size: 12px;
-	color: #00FF33;
-}
-
-/*Open primary*/
-#content div#primary{
-float:right;
-width: 900px;
-height: auto;
-}
-
-
-
-/*open navBar*/
-#content div#primary div#navBar{
-width: 900px;
-height: 50px;
-margin-top: 7px;
-text-align: center;
-border: 1px solid #686;
-font-weight: bold;
-background: #CCCCCC;
-}
-
-#content div#primary div#navBar div#quick-report{
-
-float: left;
-margin-left: 0px;
-display: block;
-margin-top: 7px;
-}
-
-#content div#primary div#navBar div#quick-report :hover{
-
-display: block;
-color: white;
-background: red;
-}
-
-
-#content div#primary div#navBar div#menu-bar{
-  margin-top: 8px;
-  float:right;
-}
-
-#content div#primary div#navBar div#menu-bar ul {
-margin: 1px 0px 0px 0px;
-
-}
-
-#content div#primary div#navBar div#menu-bar ul li{
-  position: relative;
-  display: inline;
-  padding: 20px 8px;
-}
-
-#content div#primary div#navBar div#menu-bar ul li a{
-color: orange;
-font-weight: bold;
-font-size: 16px;
-padding: .3em 10px;
-}
-
-
-#content div#primary div#navBar div#menu-bar ul li ul {
-position: absolute;
-display: none;
-width: 12em;
-
-}
-
-#content div#primary div#navBar div#menu-bar ul li:hover ul {
-display: block;
-}
-
-
-
-
-#content div#primary div#navBar div#menu-bar ul li ul li {
-width: 100%;
-}
-
-
-#content div#primary div#navBar div#menu-bar ul li img{
-  float: right;
-}
-
-
-
-#content div#primary div#quick-link ul#small-nav{
-width: 200px;
-margin: 10px 0px 25px 0px;
-padding: 0px 0px 9px 5px;
-background-color: #FFFF66;
-}
-
-#content div#primary div#quick-link ul#small-nav li {
-display: inline;
-}
-
-/*End Navbar */
-#content div#primary div#content-page{
-	margin: 30px 10px 10px 20px;
-}
-
-/* End of content && primary*/
-
-#footer{
-background: #CCCCCC;
-margin-top: 100px;
-width: auto;
-height: 50px;
-}
-
-#footer div#footer-left {
-float: left;
-width: 400px;
-margin-left: 30px;
-}
-
-#footer div#footerNav {
-float: right;
-width: auto;
-height: auto;
-}
-
-
-
-#footer div#footerNav ul#footer-right li{
-display: inline;
-}
-
-#conditions {
-  float: left;
-  
-}
-
-#conditions ul li{
-float: left;
-display: inline;
-}
-
-#field-sort { 
-}
-
-#field-sort ul li{
-float: left;
-display: inline;
-}
-/************CSS bootstraps*****%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%******/
 
 /* mixins, variables, etc. */
 
@@ -282,6 +18,9 @@ html {
   overflow-y: scroll;
 }
 
+body {
+  padding-top: 60px;
+}
 
 section {
   overflow: auto;
@@ -340,7 +79,51 @@ p4 {
   line-height: 1.7em;
   color: #FF0000;
 }
+/* header */
 
+
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+  line-height: 1;
+  &:hover {
+    color: white;
+    text-decoration: none;
+  }
+}
+
+/* footer */
+
+footer {
+
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid $grayMediumLight;
+  color: $grayLight;
+  a {
+    color: $gray;
+    &:hover { 
+      color: $grayDarker;
+    }
+  }  
+  small { 
+    float: left; 
+  }
+  ul {
+    float: right;
+    list-style: none;
+    li {
+      float: left;
+      margin-left: 10px;
+    }
+  }
+}
 
 /* miscellaneous */
 
@@ -626,10 +409,5 @@ aside {
         height: 300px;
         width:  200px;
         overflow: auto;
-}
-
-#form-input {
-
-  background: #EEEEEE;
 }
 

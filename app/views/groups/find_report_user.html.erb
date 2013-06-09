@@ -1,0 +1,45 @@
+<%this_user = User.where('id=?',@find_user_id)[0]%>
+<%= link_to "Back",group_report_path%><br/>
+Search report of : <p style="font-style: bold; color: orange"><%= this_user.email%></p> 
+Date:<%= @find_day%>-<%= @find_month%>-<%= @find_year%>
+
+
+<hr/>
+<br/>
+<% col = @catalogs.count%>
+<% number_report = @reports.count %>
+<% tmp =col-1%>
+<% if col==0%>
+      Không tìm thấy nội dung nào liên quan.<br/><br/>
+<% else %><!--have report ..create table -->
+	<table border='1' width='100%'>
+        <tr height= "50px", align = "center" bgcolor = "#CCFF33">
+        	<th>STT</th>
+          <% for i in 0..tmp %>
+          <th><%= Catalog.find(@catalogs[i].catalog_id.to_i).name%></th>
+          <% end %>
+        </tr>
+
+        <% for i in 0..tmp%>
+          <tr>
+
+          	<td bgcolor = '#CCCCCC'><%=(k=i+1)%></td>
+          <% for j in 0..tmp%>
+           		<% if @reports[i].catalog_id.to_i== @catalogs[j].catalog_id.to_i %>
+           			
+           			<td>
+           			 <%=@reports[i].content %>
+           			</td>
+           		<% else %>
+           			<td></td>	
+           		<% end %>
+
+          <% end %>
+          <tr>
+        <% end %>
+    </table>
+<p3>
+  Save As : >>
+  <%= link_to "Excel", find_report_user_path(format: "xls") %>
+</p3>
+<% end %>
