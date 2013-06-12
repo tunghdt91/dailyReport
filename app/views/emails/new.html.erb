@@ -1,0 +1,31 @@
+<h2>New Email :</h2>
+
+<%= form_for(@email) do |f| %>
+  <% if @email.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@email.errors.count, "error") %> prohibited this category from being saved:</h2>
+
+      <ul>
+      <% @email.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    Addressee: (<span style="font-style: italic; color: red">example@framgia.com</span>)
+    <%= f.text_field :to_user %>
+  </div>
+  <div class="field">
+    Title :
+      <%= f.text_field :title %>
+  </div>
+  <div class="field">
+      Content :
+      <%= f.text_area :content%>
+    </div>
+  <div class="actions">
+    <%= f.submit "Send Now",class: "btn btn-large btn-primary"%>
+  </div>
+<% end %>

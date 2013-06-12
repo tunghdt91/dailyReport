@@ -9,6 +9,7 @@ Date:<%= @find_day%>-<%= @find_month%>-<%= @find_year%>
 <% col = @catalogs.count%>
 <% number_report = @reports.count %>
 <% tmp =col-1%>
+<% tmpreport = number_report -1%> <!--Xem xet phan nay -->
 <% if col==0%>
       Không tìm thấy nội dung nào liên quan.<br/><br/>
 <% else %><!--have report ..create table -->
@@ -24,7 +25,7 @@ Date:<%= @find_day%>-<%= @find_month%>-<%= @find_year%>
           <tr>
 
           	<td bgcolor = '#CCCCCC'><%=(k=i+1)%></td>
-          <% for j in 0..tmp%>
+          <% for j in 0..tmpreport%>
            		<% if @reports[i].catalog_id.to_i== @catalogs[j].catalog_id.to_i %>
            			
            			<td>

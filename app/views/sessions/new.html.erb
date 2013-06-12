@@ -6,10 +6,10 @@
   <div class="span6 offset3">
     <%= form_for(:session, url: sessions_path) do |f| %>
 
-      <%= f.label :email %>
+      <b>Email</b>(<span style=" color: red;">*</span>):
       <%= f.text_field :email, placeholder: 'Enter your user here..'%>
 
-      <%= f.label :password %>
+      <b>Password</b>(<span style=" color: red;">*</span>):
       <%= f.password_field :password, placeholder: 'Enter your password here...'%>
 
       <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>

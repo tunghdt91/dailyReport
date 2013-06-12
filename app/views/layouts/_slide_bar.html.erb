@@ -1,40 +1,48 @@
 <div id="sidebar">
-        <p>Search this site</p>
-				<div id="search">
-					<form method='get' action='#'>
-						<input type='text' size='5' name='search' placeholder='type text here...' />
-						<input type='submit' value='search' class='btn btn-medium btn-primary' />
-					</form>
-				</div> <!--End of search sidebar-->
+    <p>Search this site</p>
+	<div id="search">
+		<form method='get' action='#'>
+			<input type='text' size='5' name='search' placeholder='type text here...' />
+			<input type='submit' value='search' class='btn btn-medium btn-primary' />
+		</form>
+	</div> <!--End of search sidebar-->
+    <div id='divider-form'></div>
 
-        <div id='divider-form'></div>
-
-				<div id="faq">
-					<h2 style="color:#33FFFF;">FAQs<br/>**********</h2>
-					<ul>
-						<li>
+	<div id="faq">
+		<h2 style="color: LightSlateGray;">FAQs<br/></h2>
+		<ul>
             <li> <%= link_to '- How do create account ?' ,faq_create_account_path %></li>
             <li> <%= link_to '- Change password ?' ,faq_changepasswd_path %></li>
-            <li> <%= link_to '- Why Report ?' ,faq_why_report_path %></li>
-            <li> <%= link_to '- Contact Manager' ,faq_contact_manager_path %></li>
-            <li> <%= link_to '- About WebSite' ,faq_aboutsite_path %></li>
-					</ul>
-				</div> <!--End of faq sidebar-->
+          	<li> <%= link_to '- Why Report ?' ,faq_why_report_path %></li>
+           	<li> <%= link_to '- Contact Manager' ,faq_contact_manager_path %></li>
+           	<li> <%= link_to '- About WebSite' ,faq_aboutsite_path %></li>
+		</ul>
+	</div> <!--End of faq sidebar-->
 
-        <div id='divider-form'></div>
+	<div id='divider-form'></div>
+	
+	<div id='statistics'>
+		<h2 style="color: LightSlateGray;">Statistics<br/></h2>
+		<ul>
+			<li>Member : <%= User.all.count%></li>
+			<li>Reported: <%=Report.all.count%></li>
+			<li>Catalog: <%=Catalog.all.count%></li>
+			<li></li>
+		</ul>
+	</div>
 
-        <% users = User.where('created_at').last(10)%>
-				<div id="new-member">
-					<h2 style="color:#33FFFF;">New Member<br/>**********</h2>
-					<ul>
+    <div id='divider-form'></div>
+    <% users = User.where('created_at').last(10)%>
+	<div id="new-member">
+		<h2 style="color: LightSlateGray;">New member<br/></h2>
+		<ul>
             <% for i in 0..9 %>
-				<li>
-                	<%= gravatar_for(users[9-i],20) %>
-                	<%=users[9-i].email%>
-                	<span class="timestamp">(<%= time_ago_in_words(users[9-i].created_at) %>   ago)</span>
-				</li>
-              <hr/>
+					<li><%= gravatar_for(users[9-i],20) %>
+                		<%=users[9-i].email%>
+                		<span class="timestamp">(<%= time_ago_in_words(users[9-i].created_at) %>   ago)</span>
+					</li>
+              		<br/>
             <%end%>
-					</ul>
-				</div><!--end of news-->
-			</div> <!--End of sidebar-->
+		</ul>
+	</div><!--end of member-->
+</div> <!--End of sidebar-->

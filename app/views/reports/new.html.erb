@@ -1,7 +1,58 @@
-<h3 style="font-size: 16px ;color:#FF3333 ;margin-left: 10px" >Send report !</h3>
+<!DOCTYPE HTML>
+<html>
+<head><title>New report</title>
+<script type="text/javascript">
+$( document ).ready(function() {
+    $('#report_catalog_id').change(function() {
+        $.ajax({
+          "url": "/get_name",
+          "type": "GET",
+          "data":{"id": document.getElementById("report_catalog_id").value},
+          success:function(result){
+           $("#sugesst").html(result);
+          }});
+   // document.getElementById("sugesst").innerHTML= document.getElementById("report_catalog_id").value;
+  });
+});
+
+</script>
+</head>
+<!-- end javascript  -->
+<body>
+<h3 style="font-size: 20px ; fon-style: bold; margin-left: 10px" >Create a new Report</h3>
 <br/>
 <br/>
-<div id= "form-input">
-<%= render 'form' %>
-</div>
+<%= form_for @report, :html => { :multipart => true } do |f| %>
+  <% if @report.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@report.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+      <% @report.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+ <div class="field">
+      <b>Catalog</b>(<span style=" color: red;">*</span>):
+        <%= f.collection_select :catalog_id,
+      Catalog.all, :id, :name,include_blank: true %>
+  </div>
+  <b>Sugesst</b> :<span style="font-size: 16px; color: red; font-style: bold"><p id="sugesst"></p></span>
+    <div class="field">
+      <b>Content</b>(<span style=" color: red;">*</span>):
+      <%= f.text_area :content %>
+    </div>
+    
+  <label for="up">Add File attach</label>
+    <%= file_field_tag 'datafile' %>
+
+  <div class="clr"></div>
+  <div class="actions">
+    <%=f.submit "Send", class: "btn btn-large btn-primary" %>
+  </div>
+<% end %>
 <%= link_to 'Back', '' %>
+</body>
+</html>

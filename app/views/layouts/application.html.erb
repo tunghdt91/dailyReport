@@ -1,6 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	<link rel="stylesheet" href="/resources/demos/style.css" />
+	<script type="text/javascript">
+		$(function(){
+			$(document).tooltip();
+		})
+		function normalImg(x){
+			x.style.height="30px";
+			x.style.width="30px";
+		}
+
+		function bigImg(x){
+			x.style.height="50px";
+			x.style.width="50px";
+		}
+	</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title><%= full_title(yield(:title)) %></title>
   	<%= stylesheet_link_tag    "application", :media => "all" %>
@@ -18,13 +34,41 @@
 			<div id="primary"> 
 				<%= render 'layouts/nav_bar' %> 
         
-        <div id='quick-link'>
-            <ul id="small-nav">
-              <li><a href= <%= root_path%>>Home  |  </a></li>
-              <li><a href="#">Contact  |  </a></li>
-              <li><a href="#">Sitemap</a></li>
-           </ul>
-        </div>
+      	  		<div id ="nav-top">
+ 	       			<div id='quick-link'>
+    	      			<ul id="small-nav">
+              				<li><a href= <%= root_path%>>Home  |  </a></li>
+              				<li><a href="#">Contact  |  </a></li>
+              				<li><a href="#">Sitemap</a></li>
+           				</ul>
+        			</div>
+        			<div id="mail-toolbar">
+        				<ul id = 'mail-tb'>
+        					<li><a href= <%= new_email_path %> >
+								<img border="0" src="/images/new-email.jpg" alt="new-email" onmouseover="bigImg(this)" onmouseout="normalImg(this)" title="New Email" width="30" height="30"/>
+								</a>
+							</li>
+ 							
+        					<li><a href= <%= inbox_path%> >
+								<img border="0" onmouseover="bigImg(this)" onmouseout="normalImg(this)" src="/images/inbox.png" alt="inbox-email" title="Inbox"  width="30" height="30"/>
+								</a>
+							</li>
+
+							<li><a href= <%= unread_path%> >
+								<img border="0" onmouseover="bigImg(this)" onmouseout="normalImg(this)" src="/images/unread.png" alt="inbox-email" title="Mail Unread" width="30" height="30"/>
+								</a>
+							</li>
+
+
+        					<li><a href=<%= sent_path%> >
+								<img border="0" src="/images/sent.jpg" onmouseover="bigImg(this)" onmouseout="normalImg(this)" alt="sent-email" title= "Sent" width="30" height="30"/>
+								</a>
+							</li>
+
+ 						</ul>
+        			</div>
+        		</div>
+
 
 				<div id="content-page">
 					<% flash.each do |key, value| %>

@@ -1,40 +1,40 @@
 <p style="font-family: Arial; font-style: bold; font-size: 18px; color: red">This is all report of Group
 </p>
 <hr/>
-Advance Search:<br/>
-<%= form_for @users, url: find_report_user_path do |f|%>
-
-  <%= f.collection_select :email,
-      @users, :id, :email,include_blank: true%> 
-  Day<input type='text' name='find_day' size='2' maxleng='2'/>
-  Month<input type='text' name='find_month' size='2' maxleng='2'/>
-  Year<input type='text' name='find_year' size='4' maxleng='4'/>
-  <%=f.submit "Search", class: "btn btn-large btn-primary" %>
-<% end %>
-
+Advance Search: yyyy-mm-dd<br/>
+<table>
+  <tr>
+  <td>
+<div id="conditions">
+  <ul>
+    <%= form_for @users, url: find_report_user_path do |f|%>
+      <li><%= f.collection_select :email,
+       @users, :id, :email,include_blank: true %> </li>
+      <li><input type='text' name='find_day' size='2' maxleng='2' /></li>
+      <li><input type='text' name='find_month' size='2' maxleng='2' id='need_present'/></li>
+      <li><input type='text' name='find_year' size='4' maxleng='4' id='need_present'/></li>
+      <li><%=f.submit "User-Search", class: "btn btn-medium btn-primary" %></li>
+    <% end %>
+  </ul>
+</div>
+</td></tr>
+<tr><td>
 <!-- end find of users -->
 <!-- find in group -->
-<form action = <%=find_report_group_path%> >
-  Day<input type='text' name='find_day' size='2' maxleng='2'/>
-  Month<input type='text' name='find_month' size='2' maxleng='2'/>
-  Year<input type='text' name='find_year' size='4' maxleng='4'/>
-  <input type='submit' value ="Search" %>
-</form>
-
+<div id="conditions">
+  <ul>
+    <form action = <%=find_report_group_path%> >
+      <li><input type='text' name='find_day' size='2' maxleng='2'/></li>
+      <li><input type='text' name='find_month' id='need_present' size='2' maxleng='2'/></li>
+      <li><input type='text' name='find_year' id='need_present' size='4' maxleng='4'/></li>
+      <li><input type='submit' value ="Group-Search" id='btn-search' %></li>
+    </form>
+  </ul>
+</div>
+</td>
+</tr>
+</table>
 <!-- end find gorup -->
-
-
-
-
-
-
-
-
-
-
-
-
-<hr/>
 <h2>  <%= Namegroup.find_by_sql("SELECT group_name from namegroups where group_id=#{current_user.group_id}")[0].group_name %>(ID: <p3><%=current_user.group_id%></p3>)<br/></h2>
 <p3>
   Save All : >>

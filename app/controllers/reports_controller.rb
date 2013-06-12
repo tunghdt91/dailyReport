@@ -5,11 +5,13 @@ class ReportsController < ApplicationController
 	def new
 		@report = Report.new
 		@catalogs = Catalog.all
+	end
 
-	respond_to do |format|
-    	format.html # new.html.erb
-      	format.json { render json: @report }
-    end
+	def get_name
+		respond_to do |format|
+			format.json { render json: Catalog.find(params[:id]).detail.to_json }
+	end
+		
 	end
 
 	def create

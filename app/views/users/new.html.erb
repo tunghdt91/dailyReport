@@ -8,7 +8,7 @@
     <%= form_for(@user) do |f| %>
      <%= render 'shared/error_messages'%>
 
-      <%= f.label :'email(*)' %>
+      <b>Email</b>(<span style=" color: red;">*</span>):
       <%= f.text_field :email, placeholder: 'example@framgia.com'%>
       Điều khoản sử dụng
             <textarea rows="6" cols="50">
@@ -27,9 +27,9 @@ Thân,
                 <span class="checkCell">
                   <table>
                     <tr>
-                    </td><input type="checkbox" id="agreement_xx1" name="nnn1"><label for="agreement_xx1">
+                    <td><input type="checkbox" id="agreement_xx1" name="nnn1"><label for="agreement_xx1">
                     </td>
-                    <td>
+                    <td >
                       Tôi đã đọc kỹ nội dung !
                     </td>
                     </tr>

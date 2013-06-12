@@ -10,12 +10,14 @@ DailyReport::Application.routes.draw do
   resources :groups
   resources :testmailers
   resources :namegroups
+  resources :emails
   root to: 'static_pages#home'
 
   #users
  
   match '/update_avatar', to: 'users#update_avatar'
   match '/xls', to: 'users#index.xls'
+  get 'get_name', to: 'reports#get_name'
 
   #active
   match '/show_info_user', to: 'actives#show_info_user'
@@ -38,6 +40,7 @@ DailyReport::Application.routes.draw do
   match '/set_role', to: 'groups#set_role'
   match '/find_report_user', to: 'groups#find_report_user'
   match '/find_report_group', to: 'groups#find_report_group'
+  match '/get_group_name', to: 'groups#get_group_name'
   
   #static_pages
   match '/faq_create_account', to: 'static_pages#faq_create_account'
@@ -45,6 +48,11 @@ DailyReport::Application.routes.draw do
   match '/faq_why_report', to: 'static_pages#faq_why_report'
   match '/faq_contact_manager', to: 'static_pages#faq_contact_manager'
   match '/faq_aboutsite', to: 'static_pages#faq_aboutsite'
+
+  #emails
+  match '/inbox', to: 'emails#inbox'
+  match '/sent', to: 'emails#sent'
+  match '/unread', to: 'emails#unread'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

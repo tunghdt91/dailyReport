@@ -1,14 +1,28 @@
 Email : <p3><%= @user.email%></p3>
 <br/>
-<div class="span8">
   <% if @user.reports.any? %>
-      <h3>Reports (<%= @user.reports.count %>)</h3>
-      <% @reports.each do |m|%>
-        	<li>Catalog :<%= Catalog.find(m.catalog_id).name %></li><br/>
-          	<%= m.content %><br/>
-          		<a href="/data/<%=m.file_name%>" target="_blank"><%= m.file_name %></a>
-              Posted <%= time_ago_in_words(m.created_at) %> ago.</br>
-          <hr/>
-      <% end %>
-  <% end %>
-</div>
+      Number Reports: <span style="font-style: bold; font-size: 16px;color: red"> (<%= @user.reports.count %>)</span>
+      <% stt=0%>
+      <br/><br/>
+      <table border = '1' width='100%'>
+         <tr height= "50px", align = "center" bgcolor = "#CCFF33">
+            <th>STT</th>
+            <th>Catalog</th>
+            <th>Content</th>
+            <th>Report At</th>
+            <th>File attach</th>
+          </tr>
+    
+        <% @reports.each do |m|%>
+          <tr align='center'>
+            <td> <%= (stt += 1) %></td>
+            <td><%= Catalog.find(m.catalog_id).name %></td>
+            <td><%= m.content %></td>
+            <td><%= m.created_at.strftime("%B %e,%Y")%> (<%= time_ago_in_words(m.created_at) %> ago)</td>
+            <td><a href="/data/<%=m.file_name%>" target="_blank"><%= m.file_name %></td>
+          </tr>
+        <% end %>      
+      </table>
+    <%else%>
+    Khong tim thay noi dung nao lien quan .  
+    <% end %>

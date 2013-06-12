@@ -3,3 +3,32 @@
 Search report of : <p style="font-style: bold; color: orange"><%= this_group.group_name%></p> 
 Date:  <p3><%= @find_day%>- <%= @find_month%>- <%= @find_year%></p3>
 
+<% col = @catalogs.count%>
+<% tmp = col-1%>
+<% number_user = @users.count%>
+<% temp_user = number_user-1%>
+
+<table  border='1' width='100%'>
+	<tr height= "50px", align = "center" bgcolor = "#CCFF33">
+		<th>User| Report</th>
+          <% for i in 0..tmp %>
+          <th><%= Catalog.find(@catalogs[i].catalog_id.to_i).name%></th>
+          <% end %>
+    </tr>
+    <% for i in 0..temp_user%>
+    	<tr>
+    		<td><%= User.find(@users[i].user_id).email %></td>
+    		<% for j in 0..tmp %> <!-- array catalog  -->
+    			<% temp="" %>
+          		<% query = "select * from reports where created_at between '#{@time_open}' and '#{@time_close}' and user_id = #{@users[i].user_id} and catalog_id='#{@catalogs[j].catalog_id}' " %>
+		    	<% @reports_this_user = Report.find_by_sql(query)%>
+		    	 	<% @reports_this_user.each do |rr|%>
+                		<% temp += (rr.content+ "\n\n---------\n") %>
+              		<%end%>
+          			<td>
+          				<%= temp %>
+          			</td>
+          	<%end%>
+    	</tr>
+    <% end %>
+</table>

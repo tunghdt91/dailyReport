@@ -1,7 +1,7 @@
 <h2>  <%= Namegroup.find_by_sql("SELECT group_name from namegroups where group_id=#{current_user.group_id}")[0].group_name %>(ID: <p3><%=current_user.group_id%></p3>)<br/></h2>
 <hr/>
 
-Manager :(<b>Read-Edit-Delete</b>)
+<span style="font-size:16px;">Manager</span> : (<span style="font-style: bold; color=red; background-color: yellow ">Read-Edit-Delete</span>)
 <br/>
 <table width='60%'>
 <% @users_manager.each do |m| %>
@@ -13,7 +13,7 @@ Manager :(<b>Read-Edit-Delete</b>)
 <table>
 <br/>
 <hr/>
-Member :
+<span style="font-size:16px;">Member</span> :
 <br/>
 	<table width='60%'>
 	   	<% @users.each do |user| %>
@@ -21,23 +21,23 @@ Member :
 			<tr>
 				<td width='20%'><%= gravatar_for(user) %></td>
 				<td width='30%'><%= user.email %></td>
-				<td><i>
+				<td><span style="font-style: bold; color=red; background-color: yellow ">
 					<p3><% if group.r?%> 
-						Read
+						Read  
 					<%else%>
-						-No- 
+						-No-   
 					<%end%>
 					<% if group.e?%> 
-						Edit
+						Edit  
 					<%else%>
-						-No- 
+						-No-   
 					<%end%>
 					<% if group.d?%> 
-						Delete
+						Delete  
 					<%else%>
-						-No-
+						-No-  
 					<%end%>
-				</p3></i>
+				</span>
 				</td>
 				<% @user = user%>
 				<td><%= link_to "Edit Role", set_role_path(@user) %></td>

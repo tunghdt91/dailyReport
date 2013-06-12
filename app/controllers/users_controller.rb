@@ -5,7 +5,6 @@ class UsersController < ApplicationController
 	def index
 		@search = User.search(params[:q])
 		@users = @search.result
-		#@users = User.paginate(page: params[:page], per_page: 20)
     	@search.build_condition if @search.conditions.empty?
     	@search.build_sort if @search.sorts.empty?
     end
@@ -58,7 +57,7 @@ class UsersController < ApplicationController
 		if params[:user].present?
 			@group = Group.find_by_user_id(params[:id].to_i)
 			group_id = params[:user][:group_id].to_i
-			@group.group_id = group_id
+			@group.update_attributes(group_id: group_id)
 			if(params[:user][:password]!="")
 				@user.update_attributes(password: params[:user][:password])
 			end

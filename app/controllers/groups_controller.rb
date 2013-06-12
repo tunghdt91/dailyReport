@@ -2,6 +2,12 @@ class GroupsController < ApplicationController
 	before_filter :checked_manager, only: [:set_role, :update]
 	before_filter :checked_read, only: [:group_report]
 
+	def get_group_name
+		respond_to do |format|
+			format.json { render json: Namegroup.find_by_group_id(params[:id]).group_name.to_json }
+		end
+	end
+
 	def new
 	end
 
@@ -61,7 +67,7 @@ class GroupsController < ApplicationController
 
 	def find_report_user
 		if params[:user][:email] == "" || params[:find_year]=="" || params[:find_month]==""
-			flash[:error] = "Need select user or choose year and choose month!"
+			flash[:error] = " Filter user |Need select user or choose year and choose month!"
 			redirect_to group_report_path
 		else # da chon user va nam
 			if check_input_form_user(params[:find_year],params[:find_month])
@@ -77,7 +83,7 @@ class GroupsController < ApplicationController
 						time_close = fix_date(tmp.year,tmp.month,tmp.day)
 						
 					else
-						flash[:error] = "Input date invalid! "
+						flash[:error] = "Filter user |Input date invalid! "
 						redirect_to group_report_path
 					end
 				else # du lieu nhap vao chinh xac yyyy-mm
@@ -92,7 +98,7 @@ class GroupsController < ApplicationController
 				query2 = "select * from reports where user_id=#{@find_user_id} and created_at between '#{time_open}' and '#{time_close}'"
 				@reports = Report.find_by_sql(query2)
 			else
-				flash[:error] = "Data input invalid"
+				flash[:error] = "Filter user |Data input invalid"
 				redirect_to root_path
 			end
 			
@@ -102,7 +108,7 @@ class GroupsController < ApplicationController
 
 	def find_report_group
 		if params[:find_year]=="" || params[:find_month]==""
-			flash[:error] = "Must choose year and choose month!"
+			flash[:error] = "Filter group |Must choose year and choose month!"
 			redirect_to group_report_path
 		else # da chon user va nam
 			if check_input_form_user(params[:find_year],params[:find_month])
@@ -112,26 +118,36 @@ class GroupsController < ApplicationController
 						@find_month = params[:find_month].to_i
 						@find_year = params[:find_year].to_i
 
-						time_open = fix_date(@find_year,@find_month,@find_day)
-						tmp= DateTime.parse(time_open) + 24.hour
-						time_close = fix_date(tmp.year,tmp.month,tmp.day)
+						@time_open = fix_date(@find_year,@find_month,@find_day)
+						tmp= DateTime.parse(@time_open) + 24.hour
+						@time_close = fix_date(tmp.year,tmp.month,tmp.day)
 					else
-						flash[:error] = "Input day invalid! "
+						flash[:error] = "Filter Group |Input day invalid! "
 						redirect_to group_report_path
 					end	
 				else # du lieu nhap vao chinh xac yyyy-mm
 					@find_month = params[:find_month].to_i
 					@find_year = params[:find_year].to_i
-					time_open = fix_date(@find_year,@find_month,1)
-					time_close = fix_date(@find_year,@find_month,31)
+					@time_open = fix_date(@find_year,@find_month,1)
+					@time_close = fix_date(@find_year,@find_month,31)
 				end
-				query = "select DISTINCT  catalog_id from reports where created_at between '#{time_open}' and '#{time_close}'"
+				@users = User.find_by_sql("SELECT * FROM groups  WHERE group_id = #{current_user.group_id}") ## all user in group
+				tmp = (@users.count - 1) # if co report cua nhom nay
+				
+				if(tmp==0)
+					str = @users[0].user_id.to_s
+				else
+					str=@users[0].user_id.to_s
+					for i in 1..tmp
+						str = str+','+@users[i].user_id.to_s
+					end
+				end
+				str = '(' + str + ')'
+
+				query = "select DISTINCT  catalog_id from reports where created_at between '#{@time_open}' and '#{@time_close}' and user_id IN #{str}"
 				@catalogs =Report.find_by_sql(query)
-				query2 = "select * from reports where created_at between '#{time_open}' and '#{time_close}'"
-				@reports = Report.find_by_sql(query2)
-				@users = User.find_by_sql("SELECT * FROM users  WHERE group_id = #{current_user.group_id}") ## all user in group	
 			else
-				flash[:error] = "Data input invalid"
+				flash[:error] = "Filter Group |Data input invalid"
 				redirect_to group_report_path
 			end
 		end

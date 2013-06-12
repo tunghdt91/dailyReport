@@ -1,7 +1,8 @@
 class Catalog < ActiveRecord::Base
   attr_accessible :name, :detail
 
-  validates :name, presence: true
+  validates :name, presence: true,uniqueness: true
+  validates :detail, presence: true
 
   def self.to_csv(options = {})
   CSV.generate(options) do |csv|

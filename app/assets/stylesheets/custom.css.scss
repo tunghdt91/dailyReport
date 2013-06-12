@@ -95,7 +95,7 @@ color: orange;
 }
 /*end slide bar*/
 #content div#faq{
-margin-top: 20px;
+margin-top: 10px;
 margin-left: 5px;
 text-align: left;
 font-style: bold;
@@ -110,13 +110,23 @@ color:#FF9900;
 }
 
 #content div#new-member{
-	margin-top: 15px;
+	margin-top: 10px;
   margin-left: 10px;
 }
 #content div#new-member ul li{
 	text-align: left;
 	font-size: 12px;
 	color: #00FF33;
+}
+
+#content div#statistics{
+  margin-top: 10px;
+  margin-left: 10px;
+}
+#content div#statistics ul li{
+  text-align: left;
+  font-size: 16px;
+  color: #00FF33;
 }
 
 /*Open primary*/
@@ -132,7 +142,6 @@ height: auto;
 #content div#primary div#navBar{
 width: 900px;
 height: 50px;
-margin-top: 7px;
 text-align: center;
 border: 1px solid #686;
 font-weight: bold;
@@ -144,7 +153,7 @@ background: #CCCCCC;
 float: left;
 margin-left: 0px;
 display: block;
-margin-top: 7px;
+margin-top: 5px;
 }
 
 #content div#primary div#navBar div#quick-report :hover{
@@ -204,20 +213,34 @@ width: 100%;
 
 
 
-#content div#primary div#quick-link ul#small-nav{
+#content div#primary div#nav-top{
+  width: 1000px;
+  margin: 10px 0px 25px 0px;
+}
+
+#content div#primary div#nav-top div#quick-link ul#small-nav{
 width: 200px;
-margin: 10px 0px 25px 0px;
+float: left;
 padding: 0px 0px 9px 5px;
 background-color: #FFFF66;
 }
 
-#content div#primary div#quick-link ul#small-nav li {
+#content div#primary div#nav-top div#quick-link ul#small-nav li {
+display: inline;
+}
+
+#content div#primary div#nav-top div#mail-toolbar ul#mail-tb{
+width: 300px;
+float: right;
+}
+
+#content div#primary div#nav-top div#mail-toolbar ul#mail-tb li {
 display: inline;
 }
 
 /*End Navbar */
 #content div#primary div#content-page{
-	margin: 30px 10px 10px 20px;
+	margin: 70px 10px 10px 20px;
 }
 
 /* End of content && primary*/
@@ -264,7 +287,25 @@ display: inline;
 float: left;
 display: inline;
 }
+
 /************CSS bootstraps*****%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%******/
+
+#btn-search {
+background-color : #004ACC;
+font-size: 19px;
+width: 150px;
+border:2px solid #BBBBBB;
+cursor:pointer;
+color: white;
+}
+#btn-search:hover{
+background-color: orange;
+}
+
+#need_present{
+  background-color : #CCCCCC;
+
+}
 
 /* mixins, variables, etc. */
 
