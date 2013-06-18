@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  	<Styles>
+    	<Style ss:ID="Default" ss:Name="Normal">  
+                    <Alignment ss:Vertical="Center"/>  
+                    <Borders>
+                    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="0.5"/>
+                    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="0.5"/>
+                    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="0.5"/>
+                    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="0.5"/>
+                    </Borders>
+                    <Font />  
+                    <Interior />  
+                    <NumberFormat />  
+                    <Protection />  
+    	</Style>
+
+ 		<Style ss:ID="s23">
+      		<Alignment ss:Horizontal="Center" ss:Vertical="Left"/> 
+      		<Font ss:Size="14" ss:Bold="5" ss:Color="#FF0000"/>
+      		<Interior ss:Color="#FFFF33" ss:Pattern="Solid"/>
+		</Style>
+  	
+  		<Style ss:ID="s20">
+      		<Alignment ss:Horizontal="Justify"/>
+    	</Style>
+  	
+  		<Style ss:ID="s24">
+      		<Alignment ss:Horizontal="Center"/>
+      		<Font ss:Size="8" ss:Bold="1" />
+      		<Interior ss:Color="#DDDDDD" ss:Pattern="Solid"/>
+  		</Style>
+  
+  		<Style ss:ID="s25">
+  	  		<Alignment ss:Horizontal="Center"/>
+      		<Font ss:Size="8" ss:Bold="1" ss:Color="#0033CC"/>
+      		<Interior ss:Color="#DDDDDD" ss:Pattern="Solid"/>
+  		</Style>
+
+  		<Style ss:ID="s26">
+      		<Alignment ss:Horizontal="Center"/>
+      		<Font ss:Size="20" ss:Bold="2" ss:Color="#0033CC"/>
+  		</Style>
+ 	</Styles>
+
+  <Worksheet ss:Name="Sheet1">
+  	
+  </Worksheet>
+</Workbook>

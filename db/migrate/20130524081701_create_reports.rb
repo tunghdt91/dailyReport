@@ -6,6 +6,7 @@ class CreateReports < ActiveRecord::Migration
       t.string :file_name
       t.string :file_path
       t.integer :user_id
+      t.integer :group_id
       t.timestamps
     end
   end

@@ -1,0 +1,32 @@
+<%= form_for(@namegroup) do |f| %>
+  <% if @namegroup.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@namegroup.errors.count, "error") %> prohibited this category from being saved:</h2>
+
+      <ul>
+      <% @namegroup.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <table width ="100%">
+  	<tr>
+  		<td>Group ID:</td>
+  		<td><%= f.text_field :group_id , disabled: "disabled"%></td>
+  	</tr>
+
+  	<tr>
+  		<td>Group Name:</td>
+  		<td><%= f.text_field :group_name%></td>
+  	</tr>
+  </table>
+  <div class="actions">
+    <%= f.submit "OK",class: "btn btn-large btn-primary"%>
+  </div>
+<% end %>
+
+<%= link_to 'Show', namegroup_path%> |
+<%= link_to 'Back', namegroups_path %>
+

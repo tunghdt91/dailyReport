@@ -1,3 +1,18 @@
+	<script type="text/javascript">
+		$(function(){
+			$(document).tooltip();
+		})
+		function normalImg(x){
+			x.style.height="30px";
+			x.style.width="30px";
+		}
+
+		function bigImg(x){
+			x.style.height="50px";
+			x.style.width="50px";
+		}
+	</script>
+
 <div id="sidebar">
     <p>Search this site</p>
 	<div id="search">
@@ -6,18 +21,17 @@
 			<input type='submit' value='search' class='btn btn-medium btn-primary' />
 		</form>
 	</div> <!--End of search sidebar-->
-    <div id='divider-form'></div>
-
-	<div id="faq">
-		<h2 style="color: LightSlateGray;">FAQs<br/></h2>
+	<div id='divider-form'></div>
+    <% users = User.all%>
+	<div id="new-member">
+		<h2 style="color: LightSlateGray;">Member<br/></h2>
 		<ul>
-            <li> <%= link_to '- How do create account ?' ,faq_create_account_path %></li>
-            <li> <%= link_to '- Change password ?' ,faq_changepasswd_path %></li>
-          	<li> <%= link_to '- Why Report ?' ,faq_why_report_path %></li>
-           	<li> <%= link_to '- Contact Manager' ,faq_contact_manager_path %></li>
-           	<li> <%= link_to '- About WebSite' ,faq_aboutsite_path %></li>
+            <% users.each do |u|%>
+             <a href = <%=user_path(u) %> ><%= gravatar_for(u,30)%></a>
+            <%end%>
 		</ul>
-	</div> <!--End of faq sidebar-->
+	</div><!--end of member-->
+	<div class='clear'></div> <!--Clear both-->
 
 	<div id='divider-form'></div>
 	
@@ -30,19 +44,31 @@
 			<li></li>
 		</ul>
 	</div>
-
-    <div id='divider-form'></div>
-    <% users = User.where('created_at').last(10)%>
-	<div id="new-member">
-		<h2 style="color: LightSlateGray;">New member<br/></h2>
+	<div class='clear'></div> <!--Clear both-->
+    <div id='divider-form'></div>  
+	<div id="link">
+		<h2 style="color: LightSlateGray;">Link<br/></h2>
 		<ul>
-            <% for i in 0..9 %>
-					<li><%= gravatar_for(users[9-i],20) %>
-                		<%=users[9-i].email%>
-                		<span class="timestamp">(<%= time_ago_in_words(users[9-i].created_at) %>   ago)</span>
-					</li>
-              		<br/>
-            <%end%>
+						<li><a href="http://www.chatwork.com/">* Chatwork.com/</a></li>
+            <li><a href="http://tech.blog.framgia.com/vn/">* Tech.blog.framgia.com/vn/</a></li>
+            <li><a href="https://github.com/">* Github.com/</a></li>
 		</ul>
-	</div><!--end of member-->
+	</div> <!--End of faq sidebar-->
+
+	<div class='clear'></div> <!--Clear both-->
+    <div id='divider-form'></div>  
+	<div id="faq">
+		<h2 style="color: LightSlateGray;">FAQs<br/></h2>
+		<ul>
+            <li> <%= link_to '- How do create account ?' ,faq_create_account_path %></li>
+            <li> <%= link_to '- Change password ?' ,faq_changepasswd_path %></li>
+          	<li> <%= link_to '- Why Report ?' ,faq_why_report_path %></li>
+           	<li> <%= link_to '- Contact Manager' ,faq_contact_manager_path %></li>
+           	<li> <%= link_to '- About WebSite' ,faq_aboutsite_path %></li>
+		</ul>
+	</div> <!--End of faq sidebar-->
+
+	
+
+    
 </div> <!--End of sidebar-->

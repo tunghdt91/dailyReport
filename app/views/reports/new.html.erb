@@ -15,6 +15,7 @@ $( document ).ready(function() {
   });
 });
 
+
 </script>
 </head>
 <!-- end javascript  -->
@@ -36,12 +37,14 @@ $( document ).ready(function() {
   <% end %>
  <div class="field">
       <b>Catalog</b>(<span style=" color: red;">*</span>):
-        <%= f.collection_select :catalog_id,
+        <table width="30%"><tr><td>
+          <%= f.collection_select :catalog_id,
       Catalog.all, :id, :name,include_blank: true %>
+        </td></tr></table>
   </div>
   <b>Sugesst</b> :<span style="font-size: 16px; color: red; font-style: bold"><p id="sugesst"></p></span>
     <div class="field">
-      <b>Content</b>(<span style=" color: red;">*</span>):
+      <b>Content</b>(<span style=" color: red;">*</span>):</br>
       <%= f.text_area :content %>
     </div>
     
@@ -53,6 +56,8 @@ $( document ).ready(function() {
     <%=f.submit "Send", class: "btn btn-large btn-primary" %>
   </div>
 <% end %>
-<%= link_to 'Back', '' %>
+
+  <br/>
+    <a onclick="window.history.back()">Back</a>
 </body>
 </html>

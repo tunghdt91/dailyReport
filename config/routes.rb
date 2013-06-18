@@ -1,13 +1,12 @@
 DailyReport::Application.routes.draw do
 
-  resources :users do
-    collection { post :search, to: 'users#index' }
-  end
+  resources :users 
+  resources :groups
   resources :sessions
   resources :actives
   resources :reports
   resources :catalogs
-  resources :groups
+  resources :admincp
   resources :testmailers
   resources :namegroups
   resources :emails
@@ -28,13 +27,14 @@ DailyReport::Application.routes.draw do
 
   #report
   match '/user_report', to: 'reports#index'
-  
+  match '/filter_month', to: 'reports#filter_month'
+  match '/export_user', to: 'reports#export_user'
+  match '/export_group', to: 'reports#export_group'
   #groups
   match '/group_report', to: 'groups#group_report'
   match '/member_report', to: 'groups#member_report'
   
   #namegroup
-  match '/setname', to: 'namegroups#setname'
 
   #groups
   match '/set_role', to: 'groups#set_role'
@@ -53,6 +53,10 @@ DailyReport::Application.routes.draw do
   match '/inbox', to: 'emails#inbox'
   match '/sent', to: 'emails#sent'
   match '/unread', to: 'emails#unread'
+
+  #admincp
+  match '/restore', to: 'admincp#restore'
+  match '/backup', to: 'admincp#backup'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,1 +1,53 @@
-abcd
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Hello Manager Group <%=@g_id%></h1>
+    <p>Email duoc gui tu dong hang ngay :</p>
+    <span style="font-size: 16px; color: red;">User:</span><%=@usr%><br/>
+  
+    <br/>
+    <hr/>
+    <% time1= Time.new.strftime("%Y-%m-%d")%>
+    <% time2= (Time.new+24.hour).strftime("%Y-%m-%d")%>
+
+    <% query1 = "Select *from reports where user_id=#{@usr_id} and created_at between '#{time1}' and '#{time2}' " %>
+    <% query2 ="Select distinct catalog_id from reports where user_id=#{@usr_id} and created_at between '#{time1}' and '#{time2}' "%>
+    <% reports = Report.find_by_sql(query1) %>  <!-- Find all report of thi user in time 1 to time2 -- >
+    <% catalogs = Report.find_by_sql(query2)%>
+    
+    <%col= catalogs.count-1%>
+    <table border="1">
+      <tr height= "20px", align = "center" bgcolor = "#CCCCCC">
+          <%for i in 0..col%>
+            <th>
+              <%= Catalog.find(catalogs[i].catalog_id).name%>
+            </th>
+          <%end%>
+      </tr>
+
+      <tr>
+        <%for i in 0..col%>
+        <% @count = 0 %>
+          <td><div id="scrollcell">
+            <% reports.each do |r|%>
+              <%if r.catalog_id==catalogs[i].catalog_id%>
+                <ul>
+                      <li><p3><%= @count+=1 %>-</p3> <%= r.content %></li>
+                      <span class="file_attach">
+                      <a href="/data/<%=r.file_name%>" target="_blank"><%= r.file_name %></a>
+                      <span class="timestamp"><%= r.created_at.strftime("%e,%B ,%Y") %> (<%= time_ago_in_words(r.created_at) %>ago)</span>
+                  </ul>
+              <%end%>
+            <%end%>
+          </div>
+          </td>
+        <% end %>
+      </tr>
+
+    </table>
+
+  </body>
+</html>

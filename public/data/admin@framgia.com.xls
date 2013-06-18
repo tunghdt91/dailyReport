@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  	<Styles>
+    	<Style ss:ID="Default" ss:Name="Normal">  
+                    <Alignment ss:Vertical="Center"/>  
+                    <Borders>
+                    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="0.5"/>
+                    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="0.5"/>
+                    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="0.5"/>
+                    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="0.5"/>
+                    </Borders>
+                    <Font />  
+                    <Interior />  
+                    <NumberFormat />  
+                    <Protection />  
+    	</Style>
+
+ 		<Style ss:ID="s23">
+      		<Alignment ss:Horizontal="Center" ss:Vertical="Left"/> 
+      		<Font ss:Size="14" ss:Bold="5" ss:Color="#FF0000"/>
+      		<Interior ss:Color="#880000" ss:Pattern="Solid"/>
+		</Style>
+  	
+  		<Style ss:ID="s20">
+      		<Alignment ss:Horizontal="Justify"/>
+    	</Style>
+  	
+  		<Style ss:ID="s24">
+      		<Alignment ss:Horizontal="Center"/>
+      		<Font ss:Size="8" ss:Bold="1" />
+      		<Interior ss:Color="#DDDDDD" ss:Pattern="Solid"/>
+  		</Style>
+  
+  		<Style ss:ID="s25">
+  	  		<Alignment ss:Horizontal="Center"/>
+      		<Font ss:Size="8" ss:Bold="1" ss:Color="#0033CC"/>
+      		<Interior ss:Color="#DDDDDD" ss:Pattern="Solid"/>
+  		</Style>
+
+  		<Style ss:ID="s26">
+      		<Alignment ss:Horizontal="Center"/>
+      		<Font ss:Size="20" ss:Bold="2" ss:Color="#0033CC"/>
+  		</Style>
+ 	</Styles>
+
+  <Worksheet ss:Name="Sheet1">
+  	
+  	<Table>
+  		<Column  ss:AutoFitWidth="0" ss:Width="100"/>
+      		<Column  ss:AutoFitWidth="1" ss:Width="150"/>
+      		<Column  ss:AutoFitWidth="1" ss:Width="150"/>
+      		<Column  ss:AutoFitWidth="1" ss:Width="150"/>
+      		<Column  ss:AutoFitWidth="1" ss:Width="150"/>
+      	<Row ss:Height="30">
+        	<Cell ss:StyleID="s26" ss:MergeAcross="4" ><Data ss:Type="String">admin@framgia.com</Data></Cell>
+      	</Row>
+
+      	<Row ss:Height="100" >
+        	<Cell ss:StyleID="s23"><Data ss:Type="String">User|Catalog</Data></Cell>
+        		<Cell ss:StyleID="s23"><Data ss:Type="String">Report Tháng 1</Data></Cell>
+        		<Cell ss:StyleID="s23"><Data ss:Type="String">Tháng 2 -Report</Data></Cell>
+        		<Cell ss:StyleID="s23"><Data ss:Type="String">Android </Data></Cell>
+        		<Cell ss:StyleID="s23"><Data ss:Type="String">Test</Data></Cell>
+      	</Row>
+      		 <Row ss:Height="150" >
+      		 	<Cell ss:StyleID="s25"><Data ss:Type="String">6-6-2013 </Data></Cell>
+             <!-- return yyyy-mm-dd-->
+
+      		 		<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell> 
+      		 		<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell> 
+      		 		<Cell ss:StyleID="s20"><Data ss:Type="String">iber cho phép bạn nhắn tin, gọi, cũng như gửi ảnh và tin nhắn video miễn phí trên toàn thế giới với hơn 200 triệu người sử dụng bằng 3G hoặc Wìi. Viber có sẵn cho điện thoại Android, iPhone, Blackberry, Windows Phone và rất nhiều thiết bị hoặc nền ứng dụng khác.
+Trên Viber, số điện thoại của bạn cũng chính mà ID của bạn. Ứng dụng đồng bộ với danh sách liên lạc di động của bạn, tự động phát hiện các số liên lạc đã cài đặt Viber.
+• Các cuộc gọi miễn phí với chất lượng âm thanh HD
+• Các nhóm có thể chứa đến 40 người tham gia
+• Gửi các nhãn dán và biểu tượng cảm xúc, giúp việc nhắn tin trở nên vui thích!
+• Chia sẻ các địa điểm
+• Trả lời tức thì các tin nhắn bằng chức năng trả lời nhanh
+• Thông báo Push đảm bảo rằng bạn không bao giờ để lỡ một cuộc gọi hay tin nhắn nào, ngay cả khi đã tắt Viber
+• Tích hợp OS – chia sẻ ảnh và video trực tiếp từ thư viện ảnh của thiết bị của bạn
+• Được thiêt kế với Native Android UI trong bộ nhớ
+• Không chứa quảng cáo và miễn phí 100%*
+Viber được dịch sang các ngôn ngữ: Tiếng Thụy Điển, tiếng Thổ Nhĩ Kỳ, tiếng Hàn, tiếng Hà Lan, tiếng Nga, tiếng Ả-rập, tiếng Hebrew, tiếng Nhật, tiếng Trung (Giản thể), tiếng Trung (Phồn thể), tiếng Tây Ban Nha, tiếng Catalan, tiếng Đức, tiếng Pháp, tiếng Ý, tiếng Bồ Đào Nha và tiếng Tây Ban Nha (Bra-xin).
+Theo dõi chúng tôi để biết các bản cập nhật và tin tức mới nhất:
+Facebook - http://facebook.com/viber
+Twitter - http://twitter.com/viber
+(*) Phí dữ liệu mạng có thể áp dụng
+
+https://play.google.com/store/apps/details?id=com.viber.voip
+
+</Data></Cell> 
+      		 		<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell> 
+      		 </Row>
+      		 <Row ss:Height="150" >
+      		 	<Cell ss:StyleID="s25"><Data ss:Type="String">5-6-2013 </Data></Cell>
+             <!-- return yyyy-mm-dd-->
+
+      		 		<Cell ss:StyleID="s20"><Data ss:Type="String">Component only. Specifies the absolute formula stored in this cell when a copy/paste occurs within the component. All formulas are persisted in R1C1 notation because they are significantly easier to parse and generate than A1-style formulas. This attribute is specified whenever a user copies a range of data with formulas. By default, formula is not written if it refers to a cell out of the copy range.
+Type:	String
+Attribute:	ss:ArrayRange
+Description:	Specifies the range of cells onto which we apply an array formula. When an array formula is specified, only the top-left cell contains an ArrayRange and Formula attribute. Other cells in the range do not contain ArrayRange or Formula. This reference may be any valid reference as long as the ss:ArrayRange attribute appears in the top-left corner of the array. For example, this means if I have an array in cells A1:B2, A1 must have the ArrayRange attribute, but the specified range reference could be B1:A2.
+Example:
+
+</Data></Cell> 
+      		 		<Cell ss:StyleID="s20"><Data ss:Type="String">sdfsdlfjdslfjldsf
+
+</Data></Cell> 
+      		 		<Cell ss:StyleID="s20"><Data ss:Type="String">dsgfjdslfkjsdlkfjllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll
+
+</Data></Cell> 
+      		 		<Cell ss:StyleID="s20"><Data ss:Type="String">dffffffffffffffffffffffffffffff
+
+</Data></Cell> 
+      		 </Row>
+      		 <Row ss:Height="150" >
+      		 	<Cell ss:StyleID="s25"><Data ss:Type="String">4-6-2013 </Data></Cell>
+             <!-- return yyyy-mm-dd-->
+
+      		 		<Cell ss:StyleID="s20"><Data ss:Type="String">dsfdsf
+
+</Data></Cell> 
+      		 		<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell> 
+      		 		<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell> 
+      		 		<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell> 
+      		 </Row>
+  	</Table>
+  </Worksheet>
+</Workbook>

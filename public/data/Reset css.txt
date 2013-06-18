@@ -1,0 +1,34 @@
+/* RESET SETTINGS*/
+html, body, div, span, h1, h2, h3,h4,strong,ol,ul,li{
+margin: 0;
+padding: 0;
+border: 0;
+outline: 0;
+vertical-align: baseline;
+background: transparent;
+}
+
+body{
+font-size: 62.5%;
+font-family: goergia,helvetica,arial;
+line-heigh: 1.5;
+background: url(images/body_bg.png)
+}
+
+ol,ul{
+list-style: none;
+}
+a{
+text-decoration: none;
+}
+a:hover{
+text-decoration: none;
+}
+.clear {
+clear: both;
+}
+
+a img{
+border:none;
+}
+/* END RESET*

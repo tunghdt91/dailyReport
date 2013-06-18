@@ -2,6 +2,13 @@ class GroupsController < ApplicationController
 	before_filter :checked_manager, only: [:set_role, :update]
 	before_filter :checked_read, only: [:group_report]
 
+	def index
+		@search = Report.search(params[:q])
+		@reports = @search.result
+    	@search.build_condition if @search.conditions.empty?
+    	@search.build_sort if @search.sorts.empty?
+	end
+
 	def get_group_name
 		respond_to do |format|
 			format.json { render json: Namegroup.find_by_group_id(params[:id]).group_name.to_json }
@@ -22,11 +29,14 @@ class GroupsController < ApplicationController
 		end
 	end
 
-	def index
-	end
 
 	def group_report
-			@users = User.find_by_sql("SELECT * FROM users  WHERE group_id = #{current_user.group_id}") ## all user in group	
+			if(current_user.group_id.nil?)
+				flash[:error] = "You Not in any group ! Please contact to admin"
+				redirect_to root_path
+			else
+				@users = User.find_by_sql("SELECT * FROM users  WHERE group_id = #{current_user.group_id}") ## all user in group	
+			end
 	end
 
 	def member_report

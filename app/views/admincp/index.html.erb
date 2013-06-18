@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+<head><title>New report</title>
+<script type="text/javascript">
+$( document ).ready(function() {
+    
+     $('#btn_confirm').click(function(){
+        if(window.confirm("All data will replace .Are you sure?")){
+            myClick();
+        } else {
+            return false;
+        }
+    });
+
+});
+	</script>
+</head>
+<!-- end javascript  -->
+<body>
+
+<!-- restore -->
+<p style="font-size: 15px; font-weight: bold; color: red">Restore Data :</p>
+<form accept-charset="UTF-8" action="/restore" class="abcd" enctype="multipart/form-data" id="abc" method="post">
+<label for="up">Add File attach</label>
+    <input id="datafile" name="datafile" type="file" />
+<div class="actions">
+    <input class="btn btn-large btn-primary" name="commit" type="submit" value="OK" id="btn_confirm"/>
+  </div>
+</form>
+
+<p style="font-size: 15px; font-weight: bold; color: red">Backup:</p>
+<form accept-charset="UTF-8" action="/backup" class="abcd" enctype="multipart/form-data" id="abc" method="post">
+<div class="actions">
+	<input id="file" name="file" type="text" />
+    <input class="btn btn-large btn-primary" name="commit" type="submit" value="OK" id="btn_confirm"/>
+  </div>
+</form>
+
+
+<br/></br>
+</body>
+</html>

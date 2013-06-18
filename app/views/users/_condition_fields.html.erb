@@ -3,6 +3,7 @@
   		<%= f.attribute_fields do |a| %>
    			<li> <%= a.attribute_select associations: [:group] %></li>
   		<% end %>
+  		
  			<li> <%= f.predicate_select %></li>
   			<%= f.value_fields do |v| %>
    			<li><%= v.text_field :value %></li>

@@ -1,11 +1,11 @@
 class NamegroupsController < ApplicationController
-	before_filter :check_admin, only: [:setname, :create]
-	def setname
-		@groups = Group.find_by_sql("select DISTINCT  group_id from groups")
-		@namegroup = Namegroup.new
+	before_filter :check_admin, only: [:update, :create, :edit]
+	def index
+		@namegroups = Namegroup.all
 	end
 
 	def create
+		binding.pry
 		if (Namegroup.find_by_group_id(params[:group_id]) == nil)
 			@namegroup = Namegroup.new()
 			@namegroup.group_id = params[:group_id].to_i
@@ -26,4 +26,24 @@ class NamegroupsController < ApplicationController
 			redirect_to root_path
 		end
 	end
+
+	def update
+		@namegroup = Namegroup.find(params[:id])
+				if @namegroup.update_attributes(params[:namegroup])
+      	  flash[:success] ="Update complete"
+      		redirect_to namegroups_path
+      	else
+      	 	flash[:error] = "UPdate fail"
+      	 	redirect_to namegroups_path
+      	end
+	end
+
+	def edit
+		@namegroup = Namegroup.find(params[:id])
+	end
+	
+	def show
+		@namegroup = Namegroup.find(params[:id])
+	end
+
 end

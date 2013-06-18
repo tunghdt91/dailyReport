@@ -1,3 +1,6 @@
+
+<h2>My Reported</h2>
+
 Email : <p3><%= @user.email%></p3>
 <br/>
   <% if @user.reports.any? %>
@@ -24,5 +27,5 @@ Email : <p3><%= @user.email%></p3>
         <% end %>      
       </table>
     <%else%>
-    Khong tim thay noi dung nao lien quan .  
+   Không tìm thấy nội dung nào liên quan .
     <% end %>

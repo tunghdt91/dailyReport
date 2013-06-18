@@ -18,6 +18,12 @@ class UserMailer < ActionMailer::Base
     mail(to: "framgia.jp@gmail.com", subject: 'Active account')  
   end
 
-  def sendmail(from,to,content)
+  def sendmail(user,manager)
+    @usr= user
+    @mng= manager
+    query ="Select *from users where email='#{user}'"
+    @g_id=User.find_by_sql(query)[0].group_id
+    @usr_id=User.find_by_sql(query)[0].id
+     mail(to: manager, subject: "#{user} Report !")
   end
 end

@@ -4,15 +4,10 @@ class UsersController < ApplicationController
 	
 	def index
 		@search = User.search(params[:q])
-		@users = @search.result
+		@users = @search.result.paginate(page: params[:page], per_page: 10)
     	@search.build_condition if @search.conditions.empty?
     	@search.build_sort if @search.sorts.empty?
-    end
-
-  	def search
-  		index
-  		render :index
-  	end
+  end
 	
 	def new
 		@user = User.new
@@ -23,12 +18,11 @@ class UsersController < ApplicationController
 		create_pass_for_user @user
 		@user.md5 = Digest::MD5.hexdigest(@user.email)
 		if @user.save
-			UserMailer.welcome_email(@user).deliver
-			UserMailer.mail_to_admin(@user).deliver
 			@group =  Group.new
 			@group.user_id = @user.id
 			@group.save
-
+			UserMailer.welcome_email(@user).deliver
+			UserMailer.mail_to_admin(@user).deliver
 			if !@user.active
 			flash[:notice] = "Thank You !Your Account is Created.Please wait admin active !"
 			end
@@ -42,8 +36,7 @@ class UsersController < ApplicationController
 
 	def show
 		@user = User.find(params[:id])
-		@reports = @user.reports.all	
-		#redirect_to  root_path
+		@reports = @user.reports.all(order: 'created_at DESC')	
 	end
 
 
@@ -54,51 +47,55 @@ class UsersController < ApplicationController
 	def update  # update user and set to table group
 		@user =  User.find(params[:id].to_i)
 	 if params[:user].present? || params[:upload].present?
-		if params[:user].present?
-			@group = Group.find_by_user_id(params[:id].to_i)
-			group_id = params[:user][:group_id].to_i
-			@group.update_attributes(group_id: group_id)
-			if(params[:user][:password]!="")
-				@user.update_attributes(password: params[:user][:password])
-			end
-			if(params[:user][:group_manager]=="1")
-				@user.update_attributes(group_manager: true)
-	       		@group.manager = true
+			if params[:user].present?
+				@group = Group.find_by_user_id(params[:id].to_i)
+				group_id = params[:user][:group_id].to_i
+				@group.update_attributes(group_id: group_id)
+				if(params[:user][:password]!="")
+					@user.update_attributes(password: params[:user][:password])
+				end
+				
+				if(params[:user][:group_manager]=="1")
+					@user.update_attributes(group_manager: true)
+	       	@group.manager = true
 	   			@group.update_attributes(r: true)
 	   			@group.update_attributes(e: true)
 	   			@group.update_attributes(d: true)
 	   		end
+	   		
 	   		if(params[:user][:group_manager]=="0")
 	   			@user.update_attributes(group_manager: false)
 	    		@group.manager = false
 	    		@group.update_attributes(r: false)
 	    		@group.update_attributes(e: false)
 	    		@group.update_attributes(d: false)
-			end
+				end
 			
-			if !Namegroup.find_by_group_id(group_id).present?
-				@group_name = Namegroup.new
-				@group_name.group_id = group_id
-				@group_name.save
-			end
-			@user.update_attributes(group_id: group_id)
-			flash[:success] = "Completed update"
-			redirect_to root_path
-		end
-		
-		if params[:upload].present?
-			name = params[:upload][:datafile].original_filename
-			directory = 'app/assets/images'
-			path = File.join(directory,name)
-	    	File.open(path, "wb") { |f| f.write(params[:upload][:datafile].read)}
-	    	if @user.update_attributes(avatar_path: name)
-			flash[:success] = "Updated avatar"
-			sign_in @user
-			redirect_to root_path
-			else
-				flash[:error] = "Error update avatar !"
-				sign_in @user
+				if !Namegroup.find_by_group_id(group_id).present?
+					@group_name = Namegroup.new
+					@group_name.group_id = group_id
+					@group_name.save
+				end
+			
+				@user.update_attributes(group_id: group_id)
+				flash[:success] = "Completed update"
 				redirect_to root_path
+			end
+		
+			if params[:upload].present?
+				name = params[:upload][:datafile].original_filename
+				directory = 'app/assets/images'
+				path = File.join(directory,name)
+	    	File.open(path, "wb") { |f| f.write(params[:upload][:datafile].read)}
+	    	
+	    	if @user.update_attributes(avatar_path: name)
+					flash[:success] = "Updated avatar"
+					sign_in @user
+					redirect_to root_path
+				else
+					flash[:error] = "Error update avatar !"
+					sign_in @user
+					redirect_to root_path
 		    end
     	end
      else

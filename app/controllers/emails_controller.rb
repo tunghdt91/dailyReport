@@ -3,10 +3,11 @@ class EmailsController < ApplicationController
 	# filter user nao doc mail user day
 	def new
 		@email = Email.new
+		@users = User.all
 	end
 
 	def unread
-		@emails = Email.find_by_sql("Select *from emails where to_user='#{current_user.email}' and mark_read = 'f'")
+		@emails = Email.find_by_sql("Select *from emails where to_user='#{current_user.email}' and mark_read = 'f' order by created_at DESC")
 	end
 
 	def show

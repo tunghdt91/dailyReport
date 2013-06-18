@@ -8,13 +8,14 @@ module UsersHelper
 		user.password_confirmation = passwd
   end
   	####### show avatar
-  def gravatar_for(user, options = { size: 50 })
+  def gravatar_for(user, options = { size: 30 })
     if user.avatar_path
       gravatar_url = user.avatar_path
     else
     gravatar_url = "none.jpg"
     end
-    image_tag(gravatar_url, alt: user.email, class: "gravatar", size: "50x50")
+    title_img = user.email
+    image_tag(gravatar_url, alt: user.email,title: title_img, class: "gravatar", width: "30" ,height: "30",onmouseover: "bigImg(this)", onmouseout: "normalImg(this)")
   end
 
 end

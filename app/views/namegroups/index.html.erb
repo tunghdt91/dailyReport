@@ -1,0 +1,29 @@
+<% provide(:title, 'Change Group Nmae') %>
+<h3 style="font-family: verdana; font-style: bold; color: orange; font-size: 16px">Edit and Update group info</h3>
+
+<hr/>
+
+<table width ="100%" border="1">
+ <tr height= "50px", align = "center" bgcolor = "#CCFF33">
+    <td width="5%">Group_ID</td>
+    <td width="35%"> Manager</td>
+    <td width="50%">Group_Name</td>
+    <td wdith="10%">Action</td>
+  </tr>
+  
+  <% @namegroups.each do |n|%>
+    <% managers = User.find_by_sql("Select email from users where group_id = #{n.group_id} and group_manager='t'")%>
+    <tr height= "50px", align = "center">
+      <td><%= n.group_id%></td>
+      <td bgcolor = "#BBBBBB">
+        <% managers.each do |m|%>
+        <p style="font-weight: bold; color: red;">
+        <%= m.email%>
+        </p>
+        <%end%>
+      </td>
+      <td><%= n.group_name%></td>
+      <td><%= link_to "Edit Name", edit_namegroup_path(n) %></td>
+    </tr>
+  <% end %>
+</table>

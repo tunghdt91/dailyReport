@@ -1,0 +1,179 @@
+<% @g_users = User.where('group_id=?',current_user.group_id) %>
+<% month_tag = Array.new(12)%>
+<% for i in 0..11%>
+	<% month_tag[i] = (i+1)%>
+<%end%>
+
+<%= search_form_for @search, url: filter_month_path do |f| %>
+	User :
+		<table width="20%">
+			<tr><td><%= f.collection_select :user_id_eq,
+       			@g_users, :id, :email ,include_blank: 'Select all user in group'%>
+       		</td>
+       	</tr>
+    </table>
+    
+       <table width="30%">
+       	<tr>
+       		<td width='35%'>Month</td>
+       		<td width="70%">Year</td>
+       	</tr>
+       	<tr>
+       		<td><%= f.select :created_at_gteq, month_tag, :prompt => 'Select Month' %></td>
+       		<td><input type="text" size="4" name="year"></td>
+       	</tr>
+
+       </table>
+    	<%= f.hidden_field :created_at_lteq%> 
+    <%=f.submit "Filter", class: "btn btn-large btn-primary" %>
+<%end%>
+<!-- print list  -->
+
+<% time = Date.parse(@time_start.to_s).at_beginning_of_month%>
+Save all As:<%= link_to "Excel", export_group_path(format: 'xls',report: @reports.pluck('id'), catalog: @catalogs,time_start: Date.parse(@time_start.to_s).at_beginning_of_month,time_end: Date.parse(@time_start.to_s).at_end_of_month  )%>
+<br/>
+<br/>
+<br/>
+<%@users.each do |u|%>
+<%= gravatar_for User.find(u) %> <span style="font-size: 13px; font-style: bold; color: red;"><%= User.find(u).email %></span><br/> 
+	<br/>
+
+	<% a1=Array.new%>
+	<% a2=Array.new%>
+	<% a3=Array.new%>
+	<% a4=Array.new%>
+	<% a5=Array.new%>
+	<table border="1">
+		<tr height= "50px", align = "center" bgcolor = "#AAAAAA">
+			<th>Date|Catalogs</th>
+			<% @catalogs.each do |c| %>
+				<th><%= Catalog.where('id=?',c)[0].name%></th>
+			<% end %>
+		</tr>
+		<!-- end of first row  -->
+			<% time = Date.parse(@time_start.to_s).at_beginning_of_month%>
+		<% @count=0 %>
+		<tr> <!--Week1 -->
+			<td bgcolor = "#CCFF33"><p style="font-style: bold; color: red;">Week1</p> (<%= time%> To <%= time.next_week%>)</td>
+			<% @catalogs.each do |c| %>
+			<% @count2=0 %>
+				<td>
+					<div id="scrollcell">
+					<% @week1.each do |w1|%>
+						<% if w1.catalog_id==c &&w1.user_id==u %>
+							<% a1[@count] = w1.id %>
+							<% @count+=1 %>
+							<ul>
+                  <li><p3><%= @count2+=1 %>-</p3> <%= w1.content %></li>
+                   <span class="file_attach">
+                   <a href="/data/<%=w1.file_name%>" target="_blank"><%= w1.file_name %></a>
+                   <span class="timestamp"><%= w1.created_at.strftime("%B %e,%Y") %> (<%= time_ago_in_words(w1.created_at) %>ago)</span>
+              </ul>
+						<% end %>
+					<%end%>
+				</div>
+				</td>	
+			<% end %>
+		</tr>
+		<% @count=0 %>
+		<tr ><!--Week2 -->
+			<td bgcolor = "#CCFF33"><p style="font-style: bold; color: red;">Week2</p>(<%= time.next_week%> to <%= time.next_week.next_week%>)</td>
+			<% @catalogs.each do |c| %>
+			<% @count2=0 %>
+				<td>
+					<div id="scrollcell">
+					<% @week2.each do |w2|%>
+						<% if w2.catalog_id==c&&w2.user_id==u %>
+							<% a2[@count] = w2.id %>
+							<% @count+=1 %>
+							<ul>
+                  <li><p3><%= @count2+=1 %>-</p3> <%= w2.content %></li>
+                   <span class="file_attach">
+                   <a href="/data/<%=w2.file_name%>" target="_blank"><%= w2.file_name %></a>
+                   <span class="timestamp"><%= w2.created_at.strftime("%B %e,%Y") %> (<%= time_ago_in_words(w2.created_at) %>ago)</span>
+              </ul>
+						<% end %>
+					<%end%>
+				</div>
+				</td>	
+			<% end %>
+		</tr>
+		<% @count=0 %>
+		<tr><!--Week3 -->
+			<td bgcolor = "#CCFF33"><p style="font-style: bold; color: red;">Week3</p>(<%= time.next_week.next_week%> to <%= time.next_week.next_week.next_week%>)</td>
+			<% @catalogs.each do |c| %>
+				<% @count2=0 %>
+				<td>
+					<div id="scrollcell">
+					<% @week3.each do |w3|%>
+						<% if w3.catalog_id==c && w3.user_id==u%>
+							<% a3[@count] = w3.id %>
+							<% @count+=1 %>
+							<ul>
+                  <li><p3><%= @count2+=1 %>-</p3> <%= w3.content %></li>
+                   <span class="file_attach">
+                   <a href="/data/<%=w3.file_name%>" target="_blank"><%= w3.file_name %></a>
+                   <span class="timestamp"><%= w3.created_at.strftime("%B %e,%Y") %> (<%= time_ago_in_words(w3.created_at) %>ago)</span>
+              </ul>
+						<% end %>
+					<%end%>
+				</div>
+				</td>	
+			<% end %>
+		</tr>
+		<% @count=0 %>
+		<tr><!--Week4 -->
+			<td bgcolor = "#CCFF33"><p style="font-style: bold; color: red;">Week4</p>(<%= time.next_week.next_week.next_week%> to  <%=time.next_week.next_week.next_week.next_week%>)
+			</td>
+			<% @catalogs.each do |c| %>
+			<% @count2=0 %>
+			 	<td>
+			 		<div id="scrollcell">
+					<% @week4.each do |w4|%>
+						<% if w4.catalog_id==c && w4.user_id==u%>
+							<% a4[@count] = w4.id %>
+							<% @count+=1 %>
+							<ul>
+                  <li><p3><%= @count2+=1 %>-</p3> <%= w4.content %></li>
+                   <span class="file_attach">
+                   <a href="/data/<%=w4.file_name%>" target="_blank"><%= w4.file_name %></a>
+                   <span class="timestamp"><%= w4.created_at.strftime("%B %e,%Y") %> (<%= time_ago_in_words(w4.created_at) %>ago)</span>
+              </ul>
+						<% end %>
+					<%end%>
+				</div>
+				</td>
+			<%end%>
+		</tr>
+		<% @count=0 %>
+		<tr><!--Week5 -->
+			<td bgcolor = "#CCFF33"><p style="font-style: bold; color: red;">Week5</p>(<%=time.next_week.next_week.next_week.next_week%> to <%=Date.parse(@time_start.to_s).at_end_of_month %>)</td>
+			
+			<% @catalogs.each do |c| %>
+			<% @count2=0 %>
+			 	<td>
+			 	<div id="scrollcell">	
+					<% @week5.each do |w5|%>
+						<% if w5.catalog_id==c && w5.user_id==u%>
+							<% a5[@count] = w5.id %>
+								<% @count+=1 %>
+							<ul>
+                  <li><p3><%= @count2+=1 %>-</p3> <%= w5.content %></li>
+                   <span class="file_attach">
+                   <a href="/data/<%=w5.file_name%>" target="_blank"><%= w5.file_name %></a>
+                   <span class="timestamp"><%= w5.created_at.strftime("%B %e,%Y") %> (<%= time_ago_in_words(w5.created_at) %>ago)</span>
+              </ul>
+						<% end %>
+					<%end%>
+				</div>
+				</td>
+		 <%end%>
+		</tr>
+	</table>
+	<br/>
+	<%this_user = User.where('id=?',u)[0].email%>
+  Save User As:<%= link_to "Excel", export_user_path(format: 'xls',user: this_user,catalog: @catalogs, we1: a1, we2: a2,  we3: a3, we4: a4, we5: a5, time_start: Date.parse(@time_start.to_s).at_beginning_of_month, time_end:  Date.parse(@time_start.to_s).at_end_of_month, w1start: time, w2start:time.next_week, w3start: time.next_week.next_week,w4start: time.next_week.next_week.next_week, w5start: time.next_week.next_week.next_week.next_week,w5end:  Date.parse(@time_start.to_s).at_end_of_month   )%>
+  <br/>
+  <hr/>
+  <br/>
+<%end%>

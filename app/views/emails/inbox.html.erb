@@ -2,7 +2,7 @@
 <table width="100%" >
 	<tr height= "80px" bgcolor = "#CCFF33">
 			<th width='30%'>Sender </th>
-			<th width='50%'>Tile</th>
+			<th width='50%'>Subject</th>
 			<th width='20%'>Time</th>
 	</tr>
 <% @emails.each do |email|%>
@@ -19,6 +19,7 @@
 			<td><a href = <%=email_path(@email) %>><%= email.title %></a></td>
 			<td><%= email.created_at.strftime("%B %e,%Y") %></td>
 		</tr>
+		
 	<%else%>
 		<tr height= "50px">
 			<td><font color=red><% if email.from_user ==current_user.email %>
@@ -34,6 +35,5 @@
 		</tr>
 	<% end %>
 <% end %>
-<hr/>
 </table>
 		

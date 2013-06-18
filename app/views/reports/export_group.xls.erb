@@ -1,0 +1,95 @@
+<% users = User.where('group_id=?',current_user.group_id)%>
+<% namegroup = Namegroup.where('group_id=?',current_user.group_id)[0].group_name%>
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Styles>
+      <Style ss:ID="Default" ss:Name="Normal">  
+                    <Alignment ss:Vertical="Center"/>  
+                    <Borders>
+                    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="0.5"/>
+                    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="0.5"/>
+                    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="0.5"/>
+                    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="0.5"/>
+                    </Borders>
+                    <Font />  
+                    <Interior />  
+                    <NumberFormat />  
+                    <Protection />  
+      </Style>
+    <Style ss:ID="s20">
+          <Alignment ss:Horizontal="Justify" ss:Vertical="Left"/>
+      </Style>
+    
+      <Style ss:ID="s24">
+          <Alignment ss:Horizontal="Center"/>
+          <Font ss:Size="8" ss:Bold="1" />
+          <Interior ss:Color="#DDDDDD" ss:Pattern="Solid"/>
+      </Style>
+      <Style ss:ID="s25">
+          <Alignment ss:Rotate="45" ss:Horizontal="Center"/>
+          <Font ss:Size="8" ss:Bold="1" ss:Color="#0033CC"/>
+          <Interior ss:Color="#DDDDDD" ss:Pattern="Solid"/>
+      </Style>
+
+      <Style ss:ID="s26">
+          <Alignment ss:Horizontal="Center"/>
+          <Font ss:Size="20" ss:Bold="2" ss:Color="#FF0000"/>
+          <Interior ss:Color="#FFCC00" ss:Pattern="Solid"/>
+      </Style>
+      <Style ss:ID="s27">
+          <Alignment ss:Horizontal="Center"/>
+          <Font ss:Size="10" ss:Bold="1" ss:Color="#0033CC"/>
+          <Interior ss:Color="#FFCCCC" ss:Pattern="Solid"/>
+      </Style>
+  </Styles>
+<!--End of style-->
+  <Worksheet ss:Name="Sheet1">
+     <Table>
+      <%col = params[:catalog].count-1%>
+      <!-- show all catalog of groups -->
+      <Column  ss:AutoFitWidth="0" ss:Width="150"/>  <!--First column (weeks) -->
+      <% for i in 0..col%>
+        <Column  ss:AutoFitWidth="1" ss:Width="200"/>
+      <%end%>
+      <!--begin   -->
+
+      <Row ss:Height="50" >
+        <Cell ss:StyleID="s27"><Data ss:Type="String"><%= namegroup %>(ID: <%= current_user.group_id%>)</Data></Cell>
+        <Cell ss:StyleID="s27" ss:MergeAcross="<%= params[:catalog].count-1%>"><Data ss:Type="String">
+          Report (<%= params[:time_start]%>) => (<%= params[:time_end]%>)
+        </Data></Cell> 
+      </Row>
+        <!-- catalog -->
+      <Row ss:Height="100" >
+        <Cell ss:StyleID="s26"><Data ss:Type="String">User | Catalog</Data></Cell>
+          <% for i in 0..col%>
+            <Cell ss:StyleID="s26"><Data ss:Type="String"><%= Catalog.find(params[:catalog][i]).name%></Data></Cell>
+          <%end%>
+      </Row>
+      <% users.each do |u|%>
+        <Row ss:Height="150" >
+          <Cell ss:StyleID="s25"><Data ss:Type="String"><%= u.email%></Data></Cell>
+          <% for i in 0..col%> <!-- i la catalogid type string-->
+              <% content="" %>
+              <% tmp = 0%>
+              
+                <% params[:report].each do |r|%>
+                  <% if Report.find(r.to_i).catalog_id.to_s == params[:catalog][i].to_s && Report.find(r.to_i).user_id.to_s == u.id.to_s%>
+                      <% tmp =tmp+1%>
+                      <%content += ( tmp.to_s + ")" + Report.find(r.to_i).created_at.strftime("%B %e,%Y")+ "\n"+Report.find(r.to_i).content+"\n\n" )%>
+                      <%= %>
+                   <%end%>
+                <%end%>
+                <Cell ss:StyleID="s20"><Data ss:Type="String"> 
+                <%= content%>
+              </Data></Cell>
+          <% end %>
+        </Row>
+      <%end%>
+     </Table>
+  </Worksheet>
+</Workbook>

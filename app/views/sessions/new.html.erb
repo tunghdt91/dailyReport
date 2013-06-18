@@ -4,14 +4,19 @@
 <div id = 'form-input'>
 <div class="row">
   <div class="span6 offset3">
+    <br/><br/>
     <%= form_for(:session, url: sessions_path) do |f| %>
-
-      <b>Email</b>(<span style=" color: red;">*</span>):
-      <%= f.text_field :email, placeholder: 'Enter your user here..'%>
-
-      <b>Password</b>(<span style=" color: red;">*</span>):
-      <%= f.password_field :password, placeholder: 'Enter your password here...'%>
-
+      <table width="90%">
+        <tr>
+          <td><b>Email</b>(<span style=" color: red;">*</span>):</td>
+          <td><%= f.text_field :email, placeholder: 'Enter your user here..'%></td>
+          
+        </tr>
+        <tr>
+          <td><b>Password</b>(<span style=" color: red;">*</span>):</td>
+          <td><%= f.password_field :password, placeholder: 'Enter your password here...'%></td>
+        </tr>
+      </table>
       <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
     <% end %>
 

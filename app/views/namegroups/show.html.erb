@@ -1,0 +1,6 @@
+Group ID: <span style="font-size: 14px; color: red; font-style: bold"><%= @namegroup.group_id %></span><br/>
+Group Name : <span style="font-size: 14px; color: red; font-style: bold"><%= @namegroup.group_name %></span><br/>
+Created_ At : <%= @namegroup.created_at.strftime("%B %e,%Y")%>
+<br/>
+<%= link_to 'Edit', edit_namegroup_path(@namegroup)%> |
+<%= link_to 'Back', namegroups_path %>

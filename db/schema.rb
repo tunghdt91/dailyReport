@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130611173910) do
+ActiveRecord::Schema.define(:version => 20130611153931) do
 
   create_table "actives", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -25,37 +25,21 @@ ActiveRecord::Schema.define(:version => 20130611173910) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "delayed_jobs", :force => true do |t|
-    t.integer  "priority",   :default => 0
-    t.integer  "attempts",   :default => 0
-    t.text     "handler"
-    t.text     "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
-    t.string   "locked_by"
-    t.string   "queue"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-  end
-
-  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
-
   create_table "emails", :force => true do |t|
     t.string   "from_user"
     t.string   "to_user"
     t.string   "title"
     t.string   "content"
+    t.boolean  "mark_read",  :default => false
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
-    t.boolean  "mark_read",  :default => false
   end
 
   create_table "groups", :force => true do |t|
     t.integer  "user_id"
     t.integer  "group_id"
     t.boolean  "manager"
-    t.boolean  "r",          :default => false
+    t.boolean  "r",          :default => true
     t.boolean  "e",          :default => false
     t.boolean  "d",          :default => false
     t.datetime "created_at",                    :null => false
@@ -75,6 +59,7 @@ ActiveRecord::Schema.define(:version => 20130611173910) do
     t.string   "file_name"
     t.string   "file_path"
     t.integer  "user_id"
+    t.integer  "group_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

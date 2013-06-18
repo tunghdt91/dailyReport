@@ -7,21 +7,28 @@
   <div class="span6 offset3">
     <%= form_for(@user) do |f| %>
      <%= render 'shared/error_messages'%>
-
-      <b>Email</b>(<span style=" color: red;">*</span>):
-      <%= f.text_field :email, placeholder: 'example@framgia.com'%>
-      Điều khoản sử dụng
-            <textarea rows="6" cols="50">
-               ĐỌC RÕ CÁC QUY ĐỊNH CỦA TRANG WEB
+     <table width="100%">
+      <tr>
+        <td><b>Email</b>(<span style=" color: red;">*</span>):</td>
+        <td><%= f.text_field :email, placeholder: 'example@framgia.com'%></td>
+      </tr>
+      <tr>
+        <td>Điều khoản sử dụng</td>
+        <td><textarea rows="6" cols="50">
+ĐỌC RÕ CÁC QUY ĐỊNH CỦA TRANG WEB
 - Viết tiếng việt có dấu
-- Hoàn thành bản report sau mỗi ngày làm việc
+- Hoàn thành bản report sau mỗi ngày làm việc 
 - Cư xử lịch thiệp, không văng tục chửi bậy
 - User Account có thể bị xóa bất cứ lúc nào bởi người quản trị
-- Mật khẩu được gửi qua email .Nên vui lòng điền đúng tên email để hệ thống xác nhận.
+ - Mật khẩu được gửi qua email .Nên vui lòng điền đúng tên email để hệ thống xác nhận.
 - Mặt khẩu chỉ được tạo 1 lần ,nên hãy cẩn thận, nếu có vấn đề gì liên quan tới tài khoản xin vui lòng liên hệ tới người quản trị.
 
-Thân,
-    </textarea>
+              Thân,
+            </textarea>
+        </td>
+      </tr>
+     </table> 
+            
      <div class="block-btnSet">
               <div class="block-text">
                 <span class="checkCell">

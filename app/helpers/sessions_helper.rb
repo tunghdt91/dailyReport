@@ -26,10 +26,6 @@ module SessionsHelper
     @current_user = user
   end
 
-  def current_product=(product)
-    @current_product= product
-  end
-  
   def current_user
     @current_user ||= User.find_by_remember_token(cookies[:remember_token])
   end
@@ -120,6 +116,16 @@ module SessionsHelper
     else
       return false
     end
+  end
+
+  def check_mail_unread()
+    @emails = Email.where('to_user=?',current_user.email)
+    @emails.each do |e|
+      if !e.mark_read
+        return true
+      end
+    end
+    return false
   end
 
 end

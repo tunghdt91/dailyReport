@@ -1,0 +1,70 @@
+<% @g_users = User.where('group_id=?',current_user.group_id) %>
+<%= search_form_for @search do |f| %>
+		User :
+		<table width="20%">
+			<tr>
+				<td><%= f.collection_select :user_id_eq,
+       		@g_users, :id, :email ,include_blank: 'Select all users'%>
+       	</td>
+       </tr>
+    </table>
+		<table width="60%">
+			<tr>
+				<td width = "50%">Time Start:</td>
+				<td width = "50%">Time End:</td>
+			</tr>
+
+			<tr>
+				<td><%= f.text_field :created_at_gteq, :'data-behaviour' =>'datepicker', :'data-date-format'=> "yyyy-mm-dd" %></td>
+				<td><%= f.text_field :created_at_lteq, :'data-behaviour' =>'datepicker', :'data-date-format'=> "yyyy-mm-dd" %></td>
+			</tr>
+		</table>
+    <%=f.submit "Filter", class: "btn btn-large btn-primary" %>
+<% end %>
+<script type="text/javascript">
+  $('[data-behaviour~=datepicker]').datepicker();
+</script>
+<div class='clear'></div> <!--Clear both-->
+
+	<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+	<br/>
+	<h2>Search Result</h2>
+	<hr/>
+<% @users.each do |u|%>
+	<% ctlog=Report.find_by_sql("Select DISTINCT catalog_id from reports where user_id=#{u}")%>
+	<% col =ctlog.count-1%>
+	<% if User.find(u).group_id == current_user.group_id%>
+	<%= gravatar_for User.find(u) %> <span style="font-size: 15px; font-style: bold; color: red;"><%= User.find(u).email %></span><br/>
+	<br/> 
+	<br/>
+	<table  border='1'>
+		<tr height= "50px", align = "center" bgcolor = "#CCCCCC">
+			<% for i in 0..col%>
+				<th><%= Catalog.find_by_sql("select *from catalogs where id = #{ctlog[i].catalog_id}")[0].name%></th>
+			<%end%>
+		</tr>
+		<!--end of title catalog end first row  -->
+		<tr>
+			<% for i in 0..col%>
+					<% @count = 0 %>
+				<td> <!--Print cell display report of this user with catalog_id = ctlog[i].catalog_id-->
+						<div id="scrollcell">
+							<%@reports.each do |r|%>
+								<% if (r.catalog_id==ctlog[i].catalog_id && r.user_id==u)%>
+										<ul>
+                	    <li><p3><%= @count+=1 %>-</p3> <%= r.content %></li>
+                  	  <span class="file_attach">
+                    	<a href="/data/<%=r.file_name%>" target="_blank"><%= r.file_name %></a>
+                    	<span class="timestamp"><%= r.created_at.strftime("%e,%B ,%Y") %> (<%= time_ago_in_words(r.created_at) %>ago)</span>
+                  	</ul>
+								<% end %>
+							<%end%>
+						</div>	
+				</td>
+			<% end %>
+		</tr>
+
+	</table>
+	<hr/>
+	<%end%>
+<% end %>

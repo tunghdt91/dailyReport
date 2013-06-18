@@ -1,5 +1,19 @@
-<h2>New Email :</h2>
+<!DOCTYPE HTML>
+<html>
+<head><title>New report</title>
+<script type="text/javascript">
+$( document ).ready(function() {
+    $('#new_email').change(function() {
+      document.getElementById("email_to_user").value=document.getElementById("email_id").value
+   // document.getElementById("sugesst").innerHTML= document.getElementById("report_catalog_id").value;
+  });
+});
 
+</script>
+</head>
+<!-- end javascript  -->
+<body>
+<h2>New Email :</h2>
 <%= form_for(@email) do |f| %>
   <% if @email.errors.any? %>
     <div id="error_explanation">
@@ -12,20 +26,30 @@
       </ul>
     </div>
   <% end %>
-
+ 
+   
+   <table width ="100%">
+    <tr>
+      <td width="80%"> <b>Type in Email:</b>(<span style=" color: blue;">*</span>):</br></td>
+      <td width ="20%"><b>or Select :</b>(<span style=" color: blue;">*</span>):</br></td>
+    </tr>
+    <tr>
+      <td ><%= f.text_field :to_user ,placeholder: 'example@framgia.com'%></td>
+      <td ><%= f.collection_select :id,
+      User.all, :email, :email%></td>
+    </tr>
+   </table>
   <div class="field">
-    Addressee: (<span style="font-style: italic; color: red">example@framgia.com</span>)
-    <%= f.text_field :to_user %>
-  </div>
-  <div class="field">
-    Title :
+    <b>Subject</b>(<span style=" color: red;">*</span>):</br>
       <%= f.text_field :title %>
   </div>
   <div class="field">
-      Content :
+     <b>Content</b>(<span style=" color: red;">*</span>):</br>
       <%= f.text_area :content%>
     </div>
   <div class="actions">
     <%= f.submit "Send Now",class: "btn btn-large btn-primary"%>
   </div>
 <% end %>
+</body>
+</html>

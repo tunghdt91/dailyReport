@@ -94,6 +94,33 @@ color: orange;
 
 }
 /*end slide bar*/
+
+
+#content div#new-member{
+  margin-top: 10px;
+  margin-left: 10px;
+  height: auto;
+}
+#content div#new-member ul li{
+  text-align: left;
+  font-size: 12px;
+  color: #00FF33;
+}
+
+#content div#link{
+margin-top: 10px;
+margin-left: 5px;
+text-align: left;
+font-style: bold;
+color:#00FF33;
+
+}
+
+#content div#link ul li a{
+line-height: 30px;
+color:#FF9900;
+}
+
 #content div#faq{
 margin-top: 10px;
 margin-left: 5px;
@@ -103,29 +130,22 @@ color:#00FF33;
 
 }
 
-
 #content div#faq ul li a{
 line-height: 30px;
 color:#FF9900;
 }
 
-#content div#new-member{
-	margin-top: 10px;
-  margin-left: 10px;
-}
-#content div#new-member ul li{
-	text-align: left;
-	font-size: 12px;
-	color: #00FF33;
-}
+
 
 #content div#statistics{
   margin-top: 10px;
   margin-left: 10px;
+  margin-bottom: 20px
 }
 #content div#statistics ul li{
   text-align: left;
   font-size: 16px;
+  line-height: 30px;
   color: #00FF33;
 }
 
@@ -182,9 +202,8 @@ margin: 1px 0px 0px 0px;
 
 #content div#primary div#navBar div#menu-bar ul li a{
 color: orange;
-font-weight: bold;
-font-size: 16px;
-padding: .3em 10px;
+font-size: 14px;
+padding: .3em 5px;
 }
 
 
@@ -203,7 +222,7 @@ display: block;
 
 
 #content div#primary div#navBar div#menu-bar ul li ul li {
-width: 100%;
+  width: 100%;
 }
 
 
@@ -219,10 +238,8 @@ width: 100%;
 }
 
 #content div#primary div#nav-top div#quick-link ul#small-nav{
-width: 200px;
+width: 300px;
 float: left;
-padding: 0px 0px 9px 5px;
-background-color: #FFFF66;
 }
 
 #content div#primary div#nav-top div#quick-link ul#small-nav li {
@@ -455,15 +472,21 @@ aside {
 
 /* forms */
 
-input, textarea, select, .uneditable-input {
+select, .uneditable-input {
   border: 1px solid #bbb;
   width: 100%;
   padding: 0px;
   margin-bottom: 15px;
   @include box_sizing;
 }
+textarea {
+  width: 60%;
+  height: 200px;
+
+}
 
 input {
+  width: 60%;
   height: auto !important;
 }
 
@@ -548,120 +571,6 @@ aside {
   font-size:18px;
 }
 
-.div_product
-{
- height:410px;
- width:300px;
- background:#e0e0e0;
- border:#fff 5px solid;
- float:left;
- text-align: center;
- .title{
-    padding-top:10px;
-    padding-bottom:5px;
-    font-size:18px;
-  }
-  img{
-    height:260px;
-    width:200px;
-    clear:both;
-  }
-  .description{
-    clear:both;
-    padding:7px 0 7px 0;
-  }
-  .price{
-    
-  }
-  .cart{
-    margin:10px 0;
-    border:#666 1px solid;
-    width:100px;
-    margin-left:100px;
-  }
-  
-}
-
-
-
-/*------------list product----------------*/
-
-#content .content ul
-{
-  list-style:none;
-  margin:0;
-  padding:0;
-  padding-top:15px;
-}
-#content .content ul li
-{
-  float:left;
-  border:#CCC solid 1px;
-}
-#content .content ul li.item
-{
-  width:230px;
-  height:460px;
-  background:#fff;
-  margin-right:13px;
-  margin-bottom:13px;
-}
-
-#content .content ul li.first
-{
-  padding-left:0;
-}
-#content .content ul li.last
-{
-  margin-right:0;
-}
-#content .content ul li .title
-{
-  padding:18px;
-}
-#content .content ul li .title a
-{
-  color:#060;
-  font-weight:bold;
-}
-#content .content ul li .title a:hover
-{
-  color:#333;
-}
-#content .content ul li .avatar
-{
-  padding-left:12px;
-  padding-right:12px;
-}
-#content .content ul li .teaser
-{
-  padding:14px;
-}
-#content .content ul li .tools .price
-{
-  line-height:40px;
-  margin-left:14px;
-  margin-right:14px;
-  clear:both;
-}
-#content .content ul li .tools .cart
-{
-  height:40px;
-  width:85px;
-  line-height:40px;
-  background:#333;
-  padding-left:5px;
-  padding-right:5px;
-  margin-left:14px;
-  font-size:14px;
-  font-weight:bold;
-}
-
-#content .content ul li .tools .cart a:hover
-{
-  color:#FFF;
-  
-}
 
 #scrollcell {
         height: 300px;

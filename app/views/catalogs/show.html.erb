@@ -1,10 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @catalog.name %>
-</p>
+  <b>Name:</b> <span style="font-size: 14px; color: red; font-weight: bold"><%= @catalog.name %></span><br/>
+  <b> Suggest :</b> <span style="font-size: 14px; color: red; font-weight: bold"><%= @catalog.detail%></span><br/>
+  <b>Created At:</b> <%= @catalog.created_at.strftime("%B %e,%Y") %>
 
+<br/><br/>
 
 <%= link_to 'Edit', edit_catalog_path(@catalog) %> |
-<%= link_to 'Back', catalog_path %>
+<%= link_to 'Back', catalogs_path %>

@@ -1,0 +1,203 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Styles>
+      <Style ss:ID="Default" ss:Name="Normal">  
+                    <Alignment ss:Vertical="Center"/>  
+                    <Borders>
+                    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="0.5"/>
+                    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="0.5"/>
+                    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="0.5"/>
+                    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="0.5"/>
+                    </Borders>
+                    <Font />  
+                    <Interior />  
+                    <NumberFormat />  
+                    <Protection />  
+      </Style>
+
+    
+      <Style ss:ID="s20">
+          <Alignment ss:Horizontal="Justify"/>
+      </Style>
+    
+      <Style ss:ID="s24">
+          <Alignment ss:Horizontal="Center"/>
+          <Font ss:Size="8" ss:Bold="1" />
+          <Interior ss:Color="#DDDDDD" ss:Pattern="Solid"/>
+      </Style>
+
+      <Style ss:ID="s26">
+          <Alignment ss:Horizontal="Center"/>
+          <Font ss:Size="20" ss:Bold="2" ss:Color="#FF0000"/>
+          <Interior ss:Color="#FFCC00" ss:Pattern="Solid"/>
+      </Style>
+      <Style ss:ID="s27">
+          <Alignment ss:Horizontal="Center"/>
+          <Font ss:Size="10" ss:Bold="1" ss:Color="#0033CC"/>
+          <Interior ss:Color="#FFCCCC" ss:Pattern="Solid"/>
+      </Style>
+  </Styles>
+<!--End of style-->
+  <Worksheet ss:Name="Sheet1">
+    <%col = params[:catalog].count-1%>
+    <Table>
+      <Column  ss:AutoFitWidth="0" ss:Width="150"/>  <!--First column (weeks) -->
+      <% for i in 0..col%>
+        <Column  ss:AutoFitWidth="1" ss:Width="250"/>
+      <%end%>
+      <!-- end declare all column in this table -->
+
+      <!-- info user -->
+      <Row ss:Height="30" >
+        <Cell ss:StyleID="s27"><Data ss:Type="String"><%= params[:user] %></Data></Cell>
+        <Cell ss:StyleID="s27" ss:MergeAcross="<%= params[:catalog].count-1%>"><Data ss:Type="String">
+          Report (<%= params[:time_start]%>) => (<%= params[:time_end]%>)
+        </Data></Cell> 
+      </Row>
+        <!-- catalog -->
+      <Row ss:Height="100" >
+        <Cell ss:StyleID="s26"><Data ss:Type="String">Week(Date)</Data></Cell>
+          <% for i in 0..col%>
+            <Cell ss:StyleID="s26"><Data ss:Type="String"><%= Catalog.find(params[:catalog][i]).name%></Data></Cell>
+          <%end%>
+      </Row>
+        <!-- week1 -->
+      <Row ss:Height="100" >
+        <Cell ss:StyleID="s24"><Data ss:Type="String">Week1(<%=params[:w1start]%> => <%= params[:w2start]%>)</Data></Cell>
+
+         <%if params[:we1].nil?%>
+          <% for i in 0..col%> <!-- params[:catalog][i] <=> id of this catalog-->
+              <Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+          <%end%>
+        <%else%>
+       
+            <% for i in 0..col%>
+              <% tmp = 0%>
+               <Cell ss:StyleID="s20"><Data ss:Type="String"> 
+                 <% params[:we1].each do |p|%>  <!--i <=> id of catalog ..string-->
+                    <% if Report.find(p.to_i).catalog_id.to_s==params[:catalog][i].to_s%>
+                      <% tmp =tmp+1%>
+                      <%= tmp.to_s%>>
+                      <%= Report.find(p.to_i).content%>
+                    <% end %>
+                  <% end %>
+                </Data></Cell>
+            <%end%>
+        <%end%>
+
+      </Row>
+      <!-- week2 -->
+      <Row ss:Height="100" >
+        <Cell ss:StyleID="s24"><Data ss:Type="String">Week2(<%=params[:w2start]%> => <%= params[:w3start]%>)</Data></Cell>
+
+        <%if params[:we2].nil?%>
+          <% for i in 0..col%> <!-- params[:catalog][i] <=> id of this catalog-->
+              <Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+          <%end%>
+        <%else%>
+       
+            <% for i in 0..col%>
+              <% tmp = 0%>
+              <% content = ""%>
+               <Cell ss:StyleID="s20"><Data ss:Type="String"> 
+                 <% params[:we2].each do |p|%>  <!--i <=> id of catalog ..string-->
+                    <% if Report.find(p.to_i).catalog_id.to_s==params[:catalog][i].to_s%>
+                      <% tmp =tmp+1%>
+                      <%= tmp.to_s%>
+                      <%= Report.find(p.to_i).content%>
+                    <% end %>
+                  <% end %>
+                </Data></Cell>
+            <%end%>
+        <%end%>
+
+      </Row>
+      <!-- week3 -->
+      <Row ss:Height="100" >
+        <Cell ss:StyleID="s24"><Data ss:Type="String">Week3(<%=params[:w3start]%> => <%= params[:w4start]%>)</Data></Cell>
+        
+        <%if params[:we3].nil?%>
+          <% for i in 0..col%> <!-- params[:catalog][i] <=> id of this catalog-->
+              <Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+          <%end%>
+        <%else%>
+       
+            <% for i in 0..col%>
+              <% tmp = 0%>
+              <% content = ""%>
+               <Cell ss:StyleID="s20"><Data ss:Type="String"> 
+                 <% params[:we3].each do |p|%>  <!--i <=> id of catalog ..string-->
+                    <% if Report.find(p.to_i).catalog_id.to_s==params[:catalog][i].to_s%>
+                      <% tmp =tmp+1%>
+                      <%= tmp.to_s%>
+                      <%= Report.find(p.to_i).content%>
+                    <% end %>
+                  <% end %>
+                </Data></Cell>
+            <%end%>
+
+        <%end%>
+
+      </Row>
+      <!-- week4 -->
+      <Row ss:Height="100" >
+        <Cell ss:StyleID="s24"><Data ss:Type="String">Week4(<%=params[:w4start]%> => <%= params[:w5start]%>)</Data></Cell>
+
+        <%if params[:we4].nil?%>
+          <% for i in 0..col%> <!-- params[:catalog][i] <=> id of this catalog-->
+              <Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+          <%end%>
+        <%else%>
+       
+            <% for i in 0..col%>
+              <% tmp = 0%>
+              <% content = ""%>
+               <Cell ss:StyleID="s20"><Data ss:Type="String"> 
+                 <% params[:we4].each do |p|%>  <!--i <=> id of catalog ..string-->
+                    <% if Report.find(p.to_i).catalog_id.to_s==params[:catalog][i].to_s%>
+                      <% tmp =tmp+1%>
+                      <%= tmp.to_s%>
+                      <%= Report.find(p.to_i).content%>
+                    <% end %>
+                  <% end %>
+                </Data></Cell>
+            <%end%>
+
+        <%end%>
+
+      </Row>
+      <!-- week5 -->
+      <Row ss:Height="100" >
+        <Cell ss:StyleID="s24"><Data ss:Type="String">Week5(<%=params[:w5start]%> => <%= params[:w5end]%>)</Data></Cell>
+
+        <%if params[:we5].nil?%>
+          <% for i in 0..col%> <!-- params[:catalog][i] <=> id of this catalog-->
+              <Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+          <%end%>
+        <%else%>
+       
+            <% for i in 0..col%>
+              <% tmp = 0%>
+              <% content = ""%>
+               <Cell ss:StyleID="s20"><Data ss:Type="String"> 
+                 <% params[:we5].each do |p|%>  <!--i <=> id of catalog ..string-->
+                    <% if Report.find(p.to_i).catalog_id.to_s==params[:catalog][i].to_s%>
+                      <% tmp =tmp+1%>
+                      <%= tmp.to_s%>
+                      <%= Report.find(p.to_i).content%>
+                    <% end %>
+                  <% end %>
+                </Data></Cell>
+            <%end%>
+
+        <%end%>
+
+      </Row>
+      <!-- end  -->
+     </Table>
+  </Worksheet>
+</Workbook>
